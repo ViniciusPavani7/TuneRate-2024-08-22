@@ -1,0 +1,111 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="LittleHeader.master.cs" Inherits="_2024_08_22_TuneRate.LittleHeader" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link href="https://fonts.googleapis.com/css2?family=Julee&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+         * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+    }
+
+    body {
+        background-color: black;
+    }
+
+    .header {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        background-color: #1C1C1C;
+    }
+
+    .logo_container {
+        display: flex;
+        align-items: center;
+        padding-left: 30px;
+    }
+
+    .logo_container h1 {
+        color: #A458DC;
+        font-family: 'Julee', cursive;
+        font-weight: normal;
+        font-size: 32px;
+        margin-left: 10px;
+    }
+
+    .logo_img {
+        height: 100px;
+    }
+
+    .navigation {
+        display: flex;
+        align-items: center;
+        padding-left: 50px;
+    }
+
+    .navigation a {
+        color: #ffffff;
+        font-family: 'Julee', cursive;
+        font-weight: normal;
+        font-size: 27px;
+        margin: 0 20px;
+        padding: 8px 0;
+        display: inline-block;
+    }
+
+    .search_box {
+        height: 40px;
+        margin-left: 50px;
+        padding: 0 10px;
+        font-size: 16px;
+        background-color: #D9D9D9;
+        border: none;
+        border-radius: 10px;
+        vertical-align: middle;
+        width: 40%;
+    }
+
+    .imgPerfil{
+        float: right;
+        height: 80px;
+        width: 80px;
+        border-radius: 200px;
+    }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="header">  
+                <div class="logo_container">
+                    <asp:Image ID="imgLogo" runat="server" class="logo_img" ImageUrl="~/imgs/TuneRate.png" />
+
+                    <h1>TuneRate</h1>
+                </div>
+                
+                <ul class="navigation">
+                    <a href="#"><li>Resenha</li></a>
+                    <a href="#"><li>Artistas</li></a>
+                    <a href="#"><li>Álbuns</li></a>
+                </ul>
+
+                <asp:TextBox ID="SearchBox" runat="server" class="search_box" OnTextChanged="SearchBox_TextChanged" AutoPostBack="True" placeholder="Pesquisar..."></asp:TextBox>
+
+                <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
+        </div>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
