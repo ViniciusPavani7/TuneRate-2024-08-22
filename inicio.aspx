@@ -1,3 +1,5 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="inicio.aspx.cs" Inherits="_2024_08_22_TuneRate.inicio" %>
+
 ﻿<!DOCTYPE html>
 <html lang="pt-br">
 

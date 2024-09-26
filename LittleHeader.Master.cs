@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +12,20 @@ namespace _2024_08_22_TuneRate
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string currentPage = Path.GetFileName(Request.Path);
 
+            if (currentPage == "resenhas.aspx")
+            {
+                navOption1.Attributes.Add("class", "active");
+            }
+            else if (currentPage == "albuns.aspx")
+            {
+                navOption2.Attributes.Add("class", "active");
+            }
+            else if (currentPage == "artistas.aspx")
+            {
+                navOption3.Attributes.Add("class", "active");
+            }
         }
 
         protected void SearchBox_TextChanged(object sender, EventArgs e)
