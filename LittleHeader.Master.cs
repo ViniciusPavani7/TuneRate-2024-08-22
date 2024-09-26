@@ -34,5 +34,18 @@ namespace _2024_08_22_TuneRate
 
             Response.Redirect($"~/Resultados.aspx?search={query}");
         }
+
+        protected void LogOut()
+        {
+            // Finaliza a sessão do usuário
+            System.Web.Security.FormsAuthentication.SignOut();
+            // Redireciona para a página de login ou outra página
+            Response.Redirect("Login.aspx");
+        }
+
+        protected void LinkButtonLogout_Click(object sender, EventArgs e)
+        {
+            LogOut();
+        }
     }
 }

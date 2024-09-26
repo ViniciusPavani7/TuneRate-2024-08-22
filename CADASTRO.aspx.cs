@@ -14,10 +14,10 @@ namespace _2024_08_22_TuneRate
 {
     public partial class CADASTRO : System.Web.UI.Page
     {
-       /* protected void Page_Load(object sender, EventArgs e)
-        {
+        /* protected void Page_Load(object sender, EventArgs e)
+         {
 
-        }*/
+         }*/
 
 
         protected void CreateUserWizard1_CreatedUser(object sender, EventArgs e)
@@ -43,35 +43,7 @@ namespace _2024_08_22_TuneRate
 
                 cmd.ExecuteNonQuery();
             }
-
-            // Envia e-mail de confirmação
-            // EnviarEmailConfirmacao(email);
         }
-
-        /*  private void EnviarEmailConfirmacao(string email)
-          {
-              string emailBody = "Obrigado por se registrar. Clique no link abaixo para confirmar sua conta: \n";
-              emailBody += "https://www.seusite.com/Confirmacao.aspx?email=" + email;
-
-              MailMessage mail = new MailMessage("tunerate.senai@gmail.com", email);
-              mail.Subject = "Confirmação de Registro";
-              mail.Body = emailBody;
-
-              SmtpClient client = new SmtpClient("smtp.gmail.com");
-              client.Port = 587; // Porta SMTP
-              client.Credentials = new NetworkCredential("tunerate.senai@gmail.com", "senaiTuneRate");
-              client.EnableSsl = true;
-
-              try
-              {
-                  client.Send(mail);
-              }
-              catch (Exception ex)
-              {
-                  // Tratar erros de envio de e-mail
-                  Response.Write("Erro ao enviar e-mail: " + ex.Message);
-              }
-          }*/
 
 
         protected void CreateUserWizard1_NextButtonClick(object sender, WizardNavigationEventArgs e)
@@ -105,6 +77,6 @@ namespace _2024_08_22_TuneRate
                 e.Cancel = true;
                 Response.Write("Erro ao criar usuário: " + status.ToString());
             }
-        }
+        } 
     }
 }

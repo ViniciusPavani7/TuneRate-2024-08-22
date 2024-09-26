@@ -57,12 +57,7 @@
 
 .navOption1:hover, .navOption2:hover, .navOption3:hover {
     color: #CF51CA;
-    /* Adicione outros estilos que deseja para o hover aqui */
 }
-
-
-
-
 
 .navigation a {
     color: #ffffff;
@@ -166,7 +161,7 @@
                                     <ul id="menuPerfil" class="dropdown-menu">
                                         <a class="dropdown-item" href="#">Perfil</a>
                                         <a class="dropdown-item" href="#">Configurações</a>
-                                        <a class="dropdown-item" href="#">Sair</a>
+                                        <asp:LinkButton ID="LinkButtonLogout" runat="server" OnClick="LinkButtonLogout_Click" class="dropdown-item">Sair</asp:LinkButton>
                                     </ul>
                               </div>
                      </div>

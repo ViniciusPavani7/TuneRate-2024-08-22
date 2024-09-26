@@ -34,9 +34,9 @@
 <body>
     <div class="background"></div>
     <form runat="server">
-        <asp:Login ID="Login1" runat="server" OnAuthenticate="Login1_Authenticate"></asp:Login>
-
-        <a href="CADASTRO.aspx">Não possui uma conta? Cadastre-se!</a>
+        <asp:Login ID="Login1" runat="server" OnAuthenticate="Login1_Authenticate" CreateUserText="Não possui uma conta? Cadastre-se!!" CreateUserUrl="~/Cadastro.aspx">
+        </asp:Login>
+        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
     </form>
 </body>
 

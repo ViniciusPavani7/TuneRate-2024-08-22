@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CADASTRO.aspx.cs" Inherits="_2024_08_22_TuneRate.CADASTRO" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Cadastro.aspx.cs" Inherits="_2024_08_22_TuneRate.CADASTRO" %>
 
 <!DOCTYPE html>
 
@@ -153,58 +153,21 @@ button{
     <div class="background"></div>
     
     <form runat="server">
-    <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" ContinueDestinationPageUrl="LOGIN.aspx"
-    OnCreatedUser="CreateUserWizard1_CreatedUser" OnNextButtonClick="CreateUserWizard1_NextButtonClick">
-        <WizardSteps>
-            <asp:CreateUserWizardStep runat="server" ID="CreateUserWizardStep1">
-                <ContentTemplate>
-                    <table>
-                        <tr>
-                            <td>Nome Completo:</td>
-                            <td>
-                                <asp:TextBox ID="FullName" runat="server" />
-                                <asp:RequiredFieldValidator ControlToValidate="FullName" runat="server" ErrorMessage="O nome completo é obrigatório." />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Nome de Usuário:</td>
-                            <td>
-                                <asp:TextBox ID="UserName" runat="server" />
-                                <asp:RequiredFieldValidator ControlToValidate="UserName" runat="server" ErrorMessage="O nome de usuário é obrigatório." />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Senha:</td>
-                            <td>
-                                <asp:TextBox ID="Password" runat="server" TextMode="Password" />
-                                <asp:RequiredFieldValidator ControlToValidate="Password" runat="server" ErrorMessage="A senha é obrigatória." />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Confirme a Senha:</td>
-                            <td>
-                                <asp:TextBox ID="ConfirmPassword" runat="server" TextMode="Password" />
-                                <asp:CompareValidator ControlToValidate="ConfirmPassword" ControlToCompare="Password" runat="server" ErrorMessage="As senhas não coincidem." />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>E-mail:</td>
-                            <td>
-                                <asp:TextBox ID="Email" runat="server" />
-                                <asp:RequiredFieldValidator ControlToValidate="Email" runat="server" ErrorMessage="O e-mail é obrigatório." />
-                            </td>
-                        </tr>
-                    </table>
-                </ContentTemplate>
-            </asp:CreateUserWizardStep>
-            <asp:CompleteWizardStep runat="server" ID="CompleteWizardStep1">
-                <ContentTemplate>
-                    Registro concluído com sucesso! Um e-mail de confirmação foi enviado para você.
-                </ContentTemplate>
-            </asp:CompleteWizardStep>
-        </WizardSteps>
-    </asp:CreateUserWizard>
 
+        <!--
+    
+
+        -->
+
+
+        <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" ContinueDestinationPageUrl="default.aspx">
+            <WizardSteps>
+                <asp:CreateUserWizardStep ID="CreateUserWizardStep1" runat="server">
+                </asp:CreateUserWizardStep>
+                <asp:CompleteWizardStep ID="CompleteWizardStep1" runat="server">
+                </asp:CompleteWizardStep>
+            </WizardSteps>
+        </asp:CreateUserWizard>
 
     </form>
 </body>
