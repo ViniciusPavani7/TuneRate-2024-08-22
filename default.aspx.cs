@@ -11,7 +11,15 @@ namespace _2024_08_22_TuneRate
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                // Liga os dados do SqlDataSource aos Repeater controls
+                ArtistRepeater.DataSource = SqlDataSource1;
+                ArtistRepeater.DataBind();
 
+                ArtistSlidesRepeater.DataSource = SqlDataSource1;
+                ArtistSlidesRepeater.DataBind();
+            }
         }
     }
 }

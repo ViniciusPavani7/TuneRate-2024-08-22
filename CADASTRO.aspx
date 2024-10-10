@@ -169,6 +169,8 @@ button{
             </WizardSteps>
         </asp:CreateUserWizard>
 
+        <asp:Label ID="lblMessage" runat="server" Text="Label"></asp:Label>
+
     </form>
 </body>
 </html>

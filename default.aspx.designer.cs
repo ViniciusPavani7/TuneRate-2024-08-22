@@ -24,13 +24,22 @@ namespace _2024_08_22_TuneRate
         protected global::System.Web.UI.WebControls.Label artTag;
 
         /// <summary>
-        /// Controle SqlDataSource1.
+        /// Controle ArtistRepeater.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.Repeater ArtistRepeater;
+
+        /// <summary>
+        /// Controle ArtistSlidesRepeater.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater ArtistSlidesRepeater;
 
         /// <summary>
         /// Controle mscTag.
@@ -67,5 +76,14 @@ namespace _2024_08_22_TuneRate
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image Image3;
+
+        /// <summary>
+        /// Controle SqlDataSource1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
     }
 }

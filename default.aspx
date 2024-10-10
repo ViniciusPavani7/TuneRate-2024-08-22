@@ -1,5 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LittleHeader.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="_2024_08_22_TuneRate.WebForm1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+
     <style>
        body{
             padding: 0;
@@ -36,8 +41,6 @@
             top: 60%; 
             height: auto;
         }
-
-       
 
         .artistDiv2, .musicDiv2 {
             overflow: hidden;
@@ -83,52 +86,37 @@
     </style>
 
     <script>
-    
-    </script>
+
+</script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="bodyPage">
+
         <div class="artistDiv">
             <asp:Label ID="artTag" runat="server" class="artsTag" Text="Artistas"></asp:Label>
             <div class="artistDiv2">
                 <div id="artistCarousel" class="carousel slide" data-bs-ride="carousel">
                     <!-- Indicadores do Carrossel -->
                     <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#artistCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#artistCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#artistCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TuneRate %>" SelectCommand="SELECT * FROM USERS
-"></asp:SqlDataSource>
+                        <asp:Repeater ID="ArtistRepeater" runat="server">
+                            <ItemTemplate> 
+                                <button type="button" data-bs-target="#artistCarousel" data-bs-slide-to="<%# Container.ItemIndex %>" class="<%# Container.ItemIndex == 0 ? "active" : "" %>" aria-current="true" aria-label="Slide <%# Container.ItemIndex + 1 %>"></button>
+                            </ItemTemplate>
+                        </asp:Repeater> 
                     </div>
 
                     <!-- Slides do Carrossel -->
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="carousel-container">
-                                <div class="indArtist">
-                                    <img src="image1.jpg" class="d-block w-100" alt="Artista 1">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Artista 1</h5>
-                                        <p>Descrição do Artista 1</p>
-                                    </div>
+                        <asp:Repeater ID="ArtistSlidesRepeater" runat="server">
+                            <ItemTemplate>
+                                <div class="slide">
+                                    <img src="~/imgs/arts/Michael_Jackson.png" class="d-block w-100" alt="Michael Jackson" />
+                                    <h5><%# Eval("Nome") %></h5>
                                 </div>
-                                <div class="indArtist">
-                                    <img src="image2.jpg" class="d-block w-100" alt="Artista 2">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Artista 2</h5>
-                                        <p>Descrição do Artista 2</p>
-                                    </div>
-                                </div>
-                                <div class="indArtist">
-                                    <img src="image3.jpg" class="d-block w-100" alt="Artista 3">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Artista 3</h5>
-                                        <p>Descrição do Artista 3</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+
                     </div>
 
                     <!-- Controles de Navegação -->
@@ -203,5 +191,13 @@
             <asp:Image ID="Image3" runat="server" class="icon1" ImageUrl="~/imgs/icon1.png" />
         </div>
     </div>
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:TuneRate %>" 
+        SelectCommand="SELECT Nome, Foto FROM Artistas">
+    </asp:SqlDataSource>
+
 </asp:Content>
+
+
 
