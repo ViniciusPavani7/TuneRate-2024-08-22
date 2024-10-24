@@ -1,203 +1,114 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LittleHeader.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="_2024_08_22_TuneRate.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
 
     <style>
-       body{
+            body {
             padding: 0;
             margin: 0;
-        }
+            }
+            .bodyPage {
+            }
+            .artTag, .MscTag {
+                font-weight: bold;
+                font-size: 35px;
+                max-height: 30px;
+                position:relative;
+                left: 180px;
+                bottom: 20px;
+            }
+            .imgIcon1 {
+                position: fixed;
+                bottom: 47px;
+                right: 10px;
+                width: 70px;
+                height: 180px;
+                justify-content: space-between;
+            }
+            .icon1 {
+                height: 70px;
+            }
+            .artistGrid,  .musicGrid {
+                display: flex;
+                overflow-x: auto; /* Adiciona rolagem horizontal se os itens ultrapassarem a largura da tela */
+                white-space: nowrap; /* Impede que os itens quebrem linha */
+                margin: 20px;
+                //padding-bottom: 1px; /* Para deixar um pouco de espaço na parte inferior */
+                padding-top: 20px;
+            }
+            .artist-container, .music-container { /* Estilo aplicado para ambos */
+                width: 220px; /* Largura de cada artista/música */
+                margin: 10px; /* Espaçamento entre os itens */
+                margin-top: 30px;
+                margin-bottom: 0px;
+                text-align: center;
+                white-space: normal; /* Permite que o texto dentro quebre linha, se necessário */
+            }
 
-       .bodyPage {
-           
-        }
+            .artist-image, .music-image {
+                width: 200px; /* Tamanho da imagem */
+                height: 200px; /* Tamanho da imagem */
+                border-radius: 50%; /* Imagem circular para artistas */
+                object-fit: cover; /* Garantir que a imagem cubra o espaço sem distorção */
+            }
 
-       .artsTag {
-            font-weight: bold;
-            font-size: 25px;
-        }
-
-       .mscsTag {
-            font-weight: bold;
-            font-size: 25px;
-        }
-
-       .artistDiv {
-            position: absolute;
-            left: 7%;
-            right:7%;
-            top: 25%;
-            height: auto;
-
-        }
-
-       .musicDiv {
-            position: absolute; 
-            left: 7%; 
-            right: 7%;
-            top: 60%; 
-            height: auto;
-        }
-
-        .artistDiv2, .musicDiv2 {
-            overflow: hidden;
-        }
-
-        .carousel-inner {
-            display: flex;
-            overflow: hidden;
-        }
-
-        .carousel-item {
-            display: flex;
-            flex: 0 0 auto;
-            width: 100%;
-        }
-
-        .carousel-container {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-        }
-
-        .indArtist, .indMusic {
-            flex: 0 0 auto;
-            width: 300px; /* Ajuste conforme necessário */
-        }
-
-        .carousel-control-prev-icon, .carousel-control-next-icon {
-            background-color: #000;
-        }
-
-       .imgIcon1 {
-            position: fixed;
-            bottom: 47px;
-            right: 10px;
-            width: 70px;
-            height: 180px;
-            justify-content: space-between;
-        }
-       .icon1 {
-            height: 70px;
-        }
+            .music-title, .artist-name {
+                margin-top: 5px;
+                font-size: 20px;
+            }            
     </style>
-
-    <script>
-
-</script>
-
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="bodyPage">
 
-        <div class="artistDiv">
-            <asp:Label ID="artTag" runat="server" class="artsTag" Text="Artistas"></asp:Label>
-            <div class="artistDiv2">
-                <div id="artistCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <!-- Indicadores do Carrossel -->
-                    <div class="carousel-indicators">
-                        <asp:Repeater ID="ArtistRepeater" runat="server">
-                            <ItemTemplate> 
-                                <button type="button" data-bs-target="#artistCarousel" data-bs-slide-to="<%# Container.ItemIndex %>" class="<%# Container.ItemIndex == 0 ? "active" : "" %>" aria-current="true" aria-label="Slide <%# Container.ItemIndex + 1 %>"></button>
-                            </ItemTemplate>
-                        </asp:Repeater> 
+
+        <!-- Substituindo o GridView por um Repeater -->
+        <div class="artistGrid">
+            <asp:Label ID="artTag" runat="server" class="artTag" Text="Artistas"></asp:Label>
+            <asp:Repeater ID="ArtistRepeater" runat="server" DataSourceID="SqlDataSource1">
+                <ItemTemplate>
+                    <div class="artist-container">
+                        <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("FotoBinario")) %>' class="artist-image" alt='<%# Eval("Nome") %>' />
+                        <h5 class="artist-name"><%# Eval("Nome") %></h5>
                     </div>
-
-                    <!-- Slides do Carrossel -->
-                    <div class="carousel-inner">
-                        <asp:Repeater ID="ArtistSlidesRepeater" runat="server">
-                            <ItemTemplate>
-                                <div class="slide">
-                                    <img src="~/imgs/arts/Michael_Jackson.png" class="d-block w-100" alt="Michael Jackson" />
-                                    <h5><%# Eval("Nome") %></h5>
-                                </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
-
-                    </div>
-
-                    <!-- Controles de Navegação -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#artistCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#artistCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
 
-        <div class="musicDiv">
-            <asp:Label ID="mscTag" runat="server" class="mscsTag" Text="Músicas"></asp:Label>
-            <div class="musicDiv2">
-                <div id="musicCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <!-- Indicadores do Carrossel -->
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#musicCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#musicCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#musicCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-
-                    <!-- Slides do Carrossel -->
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="carousel-container">
-                                <div class="indMusic">
-                                    <img src="music1.jpg" class="d-block w-100" alt="Música 1">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Música 1</h5>
-                                        <p>Descrição da Música 1</p>
-                                    </div>
-                                </div>
-                                <div class="indMusic">
-                                    <img src="music2.jpg" class="d-block w-100" alt="Música 2">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Música 2</h5>
-                                        <p>Descrição da Música 2</p>
-                                    </div>
-                                </div>
-                                <div class="indMusic">
-                                    <img src="music3.jpg" class="d-block w-100" alt="Música 3">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Música 3</h5>
-                                        <p>Descrição da Música 3</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Controles de Navegação -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#musicCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#musicCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="imgIcon1">
+        <!--<div class="imgIcon1">
             <asp:Image ID="Image1" runat="server" class="icon1" ImageUrl="~/imgs/icon1.png" />
             <asp:Image ID="Image2" runat="server" class="icon1" ImageUrl="~/imgs/icon1.png" />
             <asp:Image ID="Image3" runat="server" class="icon1" ImageUrl="~/imgs/icon1.png" />
+        </div>--!>
+
+        <!-- Substituindo o GridView por um Repeater -->
+        <div class="musicGrid">
+            <asp:Label ID="MscTag" runat="server" class="MscTag" Text="Música"></asp:Label>
+            <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">
+                <ItemTemplate>
+                    <div class="music-container">
+                        <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("Capa")) %>' class="music-image" alt='<%# Eval("Titulo") %>' />
+                        <h5 class="music-title"><%# Eval("Titulo") %></h5>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
+
     </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
         ConnectionString="<%$ ConnectionStrings:TuneRate %>" 
-        SelectCommand="SELECT Nome, Foto FROM Artistas">
+        SelectCommand="SELECT Nome, FotoBinario FROM Artistas">
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:TuneRate %>" 
+        SelectCommand="SELECT Titulo, Capa FROM Musicas">
     </asp:SqlDataSource>
 
 </asp:Content>
-
 
 

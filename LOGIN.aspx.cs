@@ -25,6 +25,8 @@ namespace _2024_08_22_TuneRate
             // Valida o usuário usando o método Membership.ValidateUser
             if (Membership.ValidateUser(usuario, senha))
             {
+                Session["UsuarioDoLogin"] = usuario;
+
                 // Login com sucesso
                 e.Authenticated = true;
 

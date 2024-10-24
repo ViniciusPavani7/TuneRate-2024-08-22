@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,12 +15,9 @@ namespace _2024_08_22_TuneRate
         {
             if (!IsPostBack)
             {
-                // Liga os dados do SqlDataSource aos Repeater controls
-                ArtistRepeater.DataSource = SqlDataSource1;
-                ArtistRepeater.DataBind();
 
-                ArtistSlidesRepeater.DataSource = SqlDataSource1;
-                ArtistSlidesRepeater.DataBind();
+
+               
             }
         }
     }

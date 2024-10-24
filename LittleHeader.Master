@@ -6,7 +6,7 @@
 <head runat="server">
     <link href="https://fonts.googleapis.com/css2?family=Julee&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap JS (inclui dependências como Popper.js) -->
@@ -57,6 +57,7 @@
 
 .navOption1:hover, .navOption2:hover, .navOption3:hover {
     color: #CF51CA;
+    /* Adicione outros estilos que deseja para o hover aqui */
 }
 
 .navigation a {
@@ -110,11 +111,14 @@
 }
 
 .dropdown-item {
-    padding: 10px; /* Adiciona preenchimento interno aos itens do menu */
-    color: white; /* Cor do texto dos itens */
-    text-align: left; /* Alinha o texto à esquerda */
-    display: block; /* Garante que os itens sejam exibidos como blocos */
-    text-decoration: none; /* Remove a decoração do texto nos itens */
+   padding: 10px;
+    color: white;
+    text-align: left;
+    display: block;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    width: 100%;
 }
 
 .dropdown-item:hover {
@@ -134,71 +138,70 @@
 <body>
     <form id="form1" runat="server">
         <div class="header">  
-                <a href="default.aspx" class="logo_container">
-                    <asp:Image ID="imgLogo" runat="server" class="logo_img" ImageUrl="~/imgs/TuneRate.png" />
-                    <h1>TuneRate</h1>
-                </a>
-                
-                <ul class="navigation">
-                    <a id="navOption1" runat="server" class="navOption1" href="resenhas.aspx"><li>Resenha</li></a>
-                    <a id="navOption2" runat="server" class="navOption2" href="albuns.aspx"><li>Álbuns</li></a>
-                    <a id="navOption3" runat="server" class="navOption3" href="artistas.aspx"><li>Artistas</li></a>
-                </ul>
+            <!-- Logo e título -->
+            <a href="default.aspx" class="logo_container">
+                <asp:Image ID="imgLogo" runat="server" class="logo_img" ImageUrl="~/imgs/TuneRate.png" />
+                <h1>TuneRate</h1>
+            </a>
 
-                <asp:TextBox ID="SearchBox" runat="server" class="search_box" OnTextChanged="SearchBox_TextChanged" AutoPostBack="True" placeholder="Pesquisar..."></asp:TextBox>
+            <!-- Barra de navegação -->
+            <ul class="navigation">
+                <a id="navOption1" runat="server" class="navOption1" href="resenhas.aspx"><li>Resenhas</li></a>
+                <a id="navOption2" runat="server" class="navOption2" href="albuns.aspx"><li>Álbuns</li></a>
+                <a id="navOption3" runat="server" class="navOption3" href="artistas.aspx"><li>Artistas</li></a>
+            </ul>
 
-                <div class="container mt-5">
-                    <!-- Dropdown com Bootstrap -->
-                    <div class="container mt-5">
-                        <div class="dropdown">
-                            <!-- Imagem que abre o menu -->
-                            <a href="#" id="dropdownMenuButton" aria-expanded="false">
-                                <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
-                            </a>
+            <!-- Caixa de busca -->
+            <asp:TextBox ID="SearchBox" runat="server" class="search_box" AutoPostBack="True" placeholder="Pesquisar..."></asp:TextBox>
 
-                            <!-- Menu dropdown -->
-                            <ul id="menuPerfil" class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Perfil</a>
-                                <a class="dropdown-item" href="#">Configurações</a>
+            <!-- Dropdown do perfil -->
+            <div class="container mt-5">
+                <div class="dropdown">
+                    <!-- Imagem que abre o menu -->
+                    <a href="#" id="dropdownMenuButton" aria-expanded="false">
+                        <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
+                    </a>
 
-                                <!-- Verificando se o usuário é administrador -->
-                                <% if (Roles.IsUserInRole("Administrador")) { %>
-                                    <a class="dropdown-item" href="AdminPage.aspx">Admin Page</a>
-                                <% } %>
+                    <!-- Menu de perfil -->
+                    <ul id="menuPerfil" class="dropdown-menu" runat="server" style="display: none;">
+                        <asp:Button ID="ButtonPerfil" runat="server" CssClass="dropdown-item" Text="Perfil" OnClick="ButtonPerfil_Click" />
+                        <asp:Button ID="ButtonConfiguracoes" runat="server" CssClass="dropdown-item" Text="Configurações" OnClick="ButtonConfiguracoes_Click" />
+                        <asp:Button ID="ButtonSair" runat="server" CssClass="dropdown-item" Text="Sair" OnClick="ButtonLogout_Click" />
 
-                                <asp:LinkButton ID="LinkButtonLogout" runat="server" OnClick="LinkButtonLogout_Click" class="dropdown-item">Sair</asp:LinkButton>
-                            </ul>
-                        </div>
-                    </div>
+                        <!-- Botão Administração, visível apenas para administradores -->
+                        <asp:Button ID="ButtonAdmin" runat="server" CssClass="dropdown-item" Text="Administração" OnClick="ButtonAdmin_Click" Visible="false" />
+                    </ul>
                 </div>
+            </div>
         </div>
 
-         <!-- JavaScript para alternar a visibilidade do menu -->
-    <script>
-        // Pega os elementos
-        const imgPerfil = document.getElementById('dropdownMenuButton');
-        const menuPerfil = document.getElementById('menuPerfil');
+        <!-- JavaScript para alternar a visibilidade do menu -->
+        <script>
+            // Obtém os elementos do menu
+            const imgPerfil = document.getElementById('<%= imgPerfil.ClientID %>');
+            const menuPerfil = document.getElementById('menuPerfil');
 
-        // Adiciona um evento de clique na imagem de perfil
-        imgPerfil.addEventListener('click', function (e) {
-            e.preventDefault(); // Previne o comportamento padrão do link
-            
-            // Alterna a visibilidade do menu
-            if (menuPerfil.style.display === "none" || menuPerfil.style.display === "") {
-                menuPerfil.style.display = "block";
-            } else {
-                menuPerfil.style.display = "none";
-            }
-        });
+            // Evento de clique para mostrar/ocultar o menu
+            imgPerfil.addEventListener('click', function (e) {
+                e.preventDefault(); // Previne o comportamento padrão
 
-        // Fecha o menu se clicar fora dele
-        document.addEventListener('click', function (event) {
-            if (!imgPerfil.contains(event.target) && !menuPerfil.contains(event.target)) {
-                menuPerfil.style.display = "none";
-            }
-        });
-    </script>
+                // Alterna a visibilidade do menu
+                if (menuPerfil.style.display === "none" || menuPerfil.style.display === "") {
+                    menuPerfil.style.display = "block";
+                } else {
+                    menuPerfil.style.display = "none";
+                }
+            });
 
+            // Fecha o menu ao clicar fora dele
+            document.addEventListener('click', function (event) {
+                if (!imgPerfil.contains(event.target) && !menuPerfil.contains(event.target)) {
+                    menuPerfil.style.display = "none";
+                }
+            });
+        </script>
+
+        <!-- Placeholder para conteúdo dinâmico -->
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
     </form>

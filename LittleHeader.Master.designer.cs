@@ -87,13 +87,49 @@ namespace _2024_08_22_TuneRate
         protected global::System.Web.UI.WebControls.Image imgPerfil;
 
         /// <summary>
-        /// Controle LinkButtonLogout.
+        /// Controle menuPerfil.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButtonLogout;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuPerfil;
+
+        /// <summary>
+        /// Controle ButtonPerfil.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonPerfil;
+
+        /// <summary>
+        /// Controle ButtonConfiguracoes.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonConfiguracoes;
+
+        /// <summary>
+        /// Controle ButtonSair.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonSair;
+
+        /// <summary>
+        /// Controle ButtonAdmin.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAdmin;
 
         /// <summary>
         /// Controle ContentPlaceHolder1.
