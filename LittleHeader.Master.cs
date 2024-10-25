@@ -93,7 +93,7 @@ namespace _2024_08_22_TuneRate
 
                         if (roleName != "Administrador")
                         {
-                            //ocultar o botão aqui . Exemplo: btnX.Visible = false;
+                            
                             ButtonAdmin.Visible = false;
                         }
 

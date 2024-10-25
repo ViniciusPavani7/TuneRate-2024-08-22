@@ -96,4 +96,30 @@
             <br /><br />
             <asp:Label ID="lblErrorDelete" runat="server" ForeColor="Red"></asp:Label>
     </div>
+
+    <div>
+        <h3>Deletar Conta</h3>
+        <asp:Label ID="Label1" runat="server" Text="" />
+        <br />
+        <label for="txtUsuarioDelete">Digite o Nome de Usuário:</label>
+        <asp:TextBox ID="txtUsuarioDelete" runat="server" />
+        <br />
+        <asp:Button ID="btnDeletarUsuario" runat="server" Text="Deletar Usuário" OnClick="btnDeletarUsuario_Click" />
+    </div>
+
+    <div>
+        <h3>Criar Conta</h3>
+        <asp:TextBox ID="txtNovoUsuario" runat="server" placeholder="Nome de Usuário" />
+        <asp:TextBox ID="txtNovaSenha" runat="server" TextMode="Password" placeholder="Senha" />
+        <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" />
+        <asp:Button ID="btnCriarConta" runat="server" Text="Criar Conta" OnClick="btnCriarConta_Click" />
+        <asp:Label ID="lblMensagemCriar" runat="server" ForeColor="Green" Visible="false"></asp:Label>
+    </div>
+
+    <div>
+        <asp:DropDownList ID="ddlUsuarios" runat="server"></asp:DropDownList>
+        <asp:Button ID="btnPraVirarAdmin" runat="server" Text="Tornar Admin" OnClick="btnPraVirarAdmin_Click" />
+        <!--<asp:Button ID="btnPraVirarMembro" runat="server" Text="Tornar Membro" OnClick="btnPraVirarMembro_Click" /> -->
+        <asp:Label ID="Label2" runat="server" Visible="false" ForeColor="Green"></asp:Label>
+    </div>
 </asp:Content>

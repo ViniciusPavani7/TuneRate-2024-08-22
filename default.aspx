@@ -54,6 +54,13 @@
                 object-fit: cover; /* Garantir que a imagem cubra o espaço sem distorção */
             }
 
+            .music-image{
+                width: 200px; /* Tamanho da imagem */
+                height: 200px; /* Tamanho da imagem */
+                border-radius: 5%; 
+                object-fit: cover; 
+            }
+
             .music-title, .artist-name {
                 margin-top: 5px;
                 font-size: 20px;

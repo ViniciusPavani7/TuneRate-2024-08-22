@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,8 +15,12 @@ namespace _2024_08_22_TuneRate
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                CarregarUsuarios(); // Método para carregar os usuários no DropDownList
+            }
         }
+
         protected void btnAdicionarArtista_Click(object sender, EventArgs e)
         {
             string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
@@ -216,6 +222,119 @@ namespace _2024_08_22_TuneRate
                 lblErrorDelete.Visible = true;
             }
         }
+        protected void btnDeletarUsuario_Click(object sender, EventArgs e)
+        {
+            string username = txtUsuarioDelete.Text.Trim(); // Pegue o nome do usuário a ser deletado
+
+            if (Membership.GetUser(username) != null)
+            {
+                // Deletar o usuário e todas as suas associações
+                bool userDeleted = Membership.DeleteUser(username, true); // O 'true' também deleta os dados em 'UsersInRoles'
+
+                if (userDeleted)
+                {
+                    lblMensagem.Text = "Usuário deletado com sucesso!";
+                    lblMensagem.ForeColor = System.Drawing.Color.Green;
+                }
+                else
+                {
+                    lblMensagem.Text = "Erro ao deletar o usuário!";
+                    lblMensagem.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+            else
+            {
+                lblMensagem.Text = "Usuário não encontrado!";
+                lblMensagem.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
+        protected void btnCriarConta_Click(object sender, EventArgs e)
+        {
+            string username = txtNovoUsuario.Text;
+            string password = txtNovaSenha.Text;
+            string email = txtEmail.Text;
+
+            MembershipCreateStatus status;
+            Membership.CreateUser(username, password, email, null, null, true, out status);
+
+            if (status == MembershipCreateStatus.Success)
+            {
+                lblMensagemCriar.Text = "Conta criada com sucesso!";
+                lblMensagemCriar.Visible = true;
+            }
+            else
+            {
+                lblMensagemCriar.Text = "Erro ao criar conta: " + status.ToString();
+                lblMensagemCriar.Visible = true;
+            }
+        }
+
+        private void CarregarUsuarios()
+        {
+            string connString = ConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT UserID, UserName FROM aspnet_Users", conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                ddlUsuarios.DataSource = reader;
+                ddlUsuarios.DataTextField = "UserName"; // Nome a ser exibido no DropDown
+                ddlUsuarios.DataValueField = "UserID"; // Valor a ser usado na lógica
+                ddlUsuarios.DataBind();
+            }
+        }
+
+        protected void btnPraVirarAdmin_Click(object sender, EventArgs e)
+        {
+            AlterarRole(ddlUsuarios.SelectedValue, "780E493F-EC45-4860-A2A8-EBFAB1B392B0"); // RoleID do Administrador
+        }
+
+        /*
+        protected void btnPraVirarMembro_Click(object sender, EventArgs e)
+        {
+            AlterarRole(ddlUsuarios.SelectedValue, "A69019BB-AD81-4A51-92E9-95C989567770"); // RoleID do Membro
+        }
+        */
+
+        private void AlterarRole(string userId, string roleId)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                // Verifica se o usuário já existe na tabela
+                string verificaUsuarioQuery = "SELECT COUNT(*) FROM aspnet_UsersInRoles WHERE UserId = @UserId AND RoleId = @RoleId";
+                using (SqlCommand verificaCmd = new SqlCommand(verificaUsuarioQuery, conn))
+                {
+                    verificaCmd.Parameters.AddWithValue("@UserId", userId);
+                    verificaCmd.Parameters.AddWithValue("@RoleId", roleId);
+                    int count = (int)verificaCmd.ExecuteScalar();
+
+                    if (count > 0) // O usuário já existe com essa função
+                    {
+                        
+                    }
+                    else // O usuário não existe com essa função, insira um novo
+                    {
+                        // Insere o novo usuário
+                        string insertQuery = "INSERT INTO aspnet_UsersInRoles (UserId, RoleId) VALUES (@UserId, @RoleId)";
+                        using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
+                        {
+                            insertCmd.Parameters.AddWithValue("@UserId", userId);
+                            insertCmd.Parameters.AddWithValue("@RoleId", roleId);
+                            insertCmd.ExecuteNonQuery();
+                        }
+
+                        
+                       
+                    }
+                }
+            }
+        }
     }
 }
-    
