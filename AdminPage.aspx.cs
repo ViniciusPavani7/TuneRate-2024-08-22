@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -17,7 +18,49 @@ namespace _2024_08_22_TuneRate
         {
             if (!IsPostBack)
             {
-                CarregarUsuarios(); // Método para carregar os usuários no DropDownList
+                // Carregar a lista de artistas no DropDownList
+                CarregarArtista();
+
+                // Carregar a lista de álbuns no DropDownList
+                PreencherAlbuns();
+            }
+        }
+
+        private void CarregarArtista()
+        {
+            string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(conexao))
+            {
+                string sql = "SELECT ArtistaId, Nome FROM Artistas";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    ddlArtistas.DataSource = reader;
+                    ddlArtistas.DataTextField = "Nome";
+                    ddlArtistas.DataValueField = "ArtistaId";
+                    ddlArtistas.DataBind();
+                }
+            }
+        }
+
+        private void PreencherAlbuns()
+        {
+            string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(conexao))
+            {
+                string sql = "SELECT AlbumId, Titulo FROM Albuns";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    ddlAlbuns.DataSource = reader;
+                    ddlAlbuns.DataTextField = "Titulo";
+                    ddlAlbuns.DataValueField = "AlbumId";
+                    ddlAlbuns.DataBind();
+                }
             }
         }
 
@@ -128,100 +171,158 @@ namespace _2024_08_22_TuneRate
             }
         }
 
-        protected void btnAdicionarMusic_Click(object sender, EventArgs e)
+        private void CarregarArtistas()
         {
-            try
+            string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(conexao))
             {
-                string titulo = txtMscTitle.Text;
-                string autor = txtMscAuthor.Text;
-                string feats = txtMscFeats.Text;
-                string genero = txtMscGenre.Text;
-                string dataLancamento = txtMscDate.Text;
-                byte[] capa = null;
-
-                // Upload da imagem (capa)
-                if (ImageMscUpload.HasFile)
+                string sql = "SELECT ArtistaId, Nome FROM Artistas ORDER BY Nome";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
-                    using (BinaryReader br = new BinaryReader(ImageMscUpload.PostedFile.InputStream))
-                    {
-                        capa = br.ReadBytes((int)ImageMscUpload.PostedFile.InputStream.Length);
-                    }
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    ddlArtistas.DataSource = reader;
+                    ddlArtistas.DataTextField = "Nome";
+                    ddlArtistas.DataValueField = "ArtistaId";
+                    ddlArtistas.DataBind();
                 }
-
-                // Conexão com o banco de dados
-
-                string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
-
-                using (SqlConnection conn = new SqlConnection(conexao))
-                {
-                    string query = "INSERT INTO Musicas (Titulo, Autor, Feats, Capa, DataLancamento, Genero) " +
-                                   "VALUES (@Titulo, @Autor, @Feats, @Capa, @DataLancamento, @Genero)";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Titulo", titulo);
-                        cmd.Parameters.AddWithValue("@Autor", autor);
-                        cmd.Parameters.AddWithValue("@Feats", feats);
-                        cmd.Parameters.AddWithValue("@Capa", capa ?? (object)DBNull.Value);
-                        cmd.Parameters.AddWithValue("@DataLancamento", dataLancamento);
-                        cmd.Parameters.AddWithValue("@Genero", genero);
-
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        lblErrorAdd.Text = "Música adicionada com sucesso!";
-                        lblErrorAdd.ForeColor = System.Drawing.Color.Green;
-                        lblErrorAdd.Visible = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                lblErrorAdd.Text = "Erro ao adicionar música: " + ex.Message;
-                lblErrorAdd.Visible = true;
             }
         }
 
-        protected void btnDeletarMusic_Click(object sender, EventArgs e)
+        protected void btnAdicionarAlbum_Click(object sender, EventArgs e)
         {
-            try
+            string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(conexao))
             {
-                string nomeOuID = txtDelete.Text;
+                string sql = "INSERT INTO Albuns (Titulo, ArtistaId, DataLancamento, CapaBinaria) VALUES (@Titulo, @ArtistaId, @DataLancamento, @CapaBinaria)";
 
-                // Conexão com o banco de dados
-
-                string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
-
-                using (SqlConnection conn = new SqlConnection(conexao))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
-                    string query = "DELETE FROM Musicas WHERE Titulo = @Titulo OR Autor = @Autor";
+                    cmd.Parameters.AddWithValue("@Titulo", txtTituloAlbum.Text);
+                    cmd.Parameters.AddWithValue("@ArtistaId", ddlArtistas.SelectedValue);
 
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    // Converter a data para o formato americano
+                    if (DateTime.TryParse(txtDataLancamentoAlbum.Text, out DateTime dataLancamento))
                     {
-                        cmd.Parameters.AddWithValue("@Titulo", nomeOuID);
-                        cmd.Parameters.AddWithValue("@Autor", nomeOuID);
+                        cmd.Parameters.AddWithValue("@DataLancamento", dataLancamento);
+                    }
+                    else
+                    {
+                        LabelErrorAlbum.Text = "Data de lançamento inválida. Por favor, insira uma data válida.";
+                        LabelErrorAlbum.Visible = true; // Torna o Label visível
+                        return; // Interrompe a execução
+                    }
 
-                        conn.Open();
-                        int rowsAffected = cmd.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
+                    if (FileUploadCapa.HasFile)
+                    {
+                        byte[] capaBytes;
+                        using (BinaryReader reader = new BinaryReader(FileUploadCapa.PostedFile.InputStream))
                         {
-                            lblErrorDelete.Text = "Música deletada com sucesso!";
-                            lblErrorDelete.ForeColor = System.Drawing.Color.Green;
+                            capaBytes = reader.ReadBytes(FileUploadCapa.PostedFile.ContentLength);
+                        }
+                        cmd.Parameters.AddWithValue("@CapaBinaria", capaBytes);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@CapaBinaria", DBNull.Value); 
+                    }
+
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        LabelErrorAlbum.Visible = false; // Limpa a mensagem de erro se a inserção for bem-sucedida
+                    }
+                    catch (Exception ex)
+                    {
+                        LabelErrorAlbum.Text = "Ocorreu um erro ao adicionar o álbum: " + ex.Message;
+                        LabelErrorAlbum.Visible = true; // Torna o Label visível
+                    }
+                }
+            }
+        }
+
+        protected void btnAdicionarMusica_Click(object sender, EventArgs e)
+        {
+            string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(conexao))
+            {
+                string sql = "INSERT INTO Musicas (Titulo, Feats, DataLancamento, DataAdicionado, Capa, AlbumID) VALUES (@Titulo, @Feats, @DataLancamento, @DataAdicionado, @Capa, @AlbumID)";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Titulo", txtTitulo.Text);
+                    cmd.Parameters.AddWithValue("@Feats", txtFeats.Text);
+
+                    // Tenta converter a data de lançamento
+                    if (DateTime.TryParse(txtDataLancamento.Text, out DateTime dataLancamento))
+                    {
+                        cmd.Parameters.AddWithValue("@DataLancamento", dataLancamento);
+                    }
+                    else
+                    {
+                        lblMensagem.Text = "Data de lançamento inválida. Por favor, insira uma data no formato AAAA-MM-DD.";
+                        return;
+                    }
+
+                    // Data atual para DataAdicionado
+                    cmd.Parameters.AddWithValue("@DataAdicionado", DateTime.Now);
+
+                    // Converte a imagem de capa para binário e especifica o tipo correto
+                    if (FileUpload1.HasFile)
+                    {
+                        byte[] capaBytes;
+                        using (BinaryReader reader = new BinaryReader(FileUpload1.PostedFile.InputStream))
+                        {
+                            capaBytes = reader.ReadBytes(FileUpload1.PostedFile.ContentLength);
+                        }
+                        cmd.Parameters.Add("@Capa", SqlDbType.VarBinary).Value = capaBytes;
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@Capa", SqlDbType.VarBinary).Value = DBNull.Value;
+                    }
+
+                    // Define AlbumID como NULL se for single, ou usa o valor do álbum selecionado
+                    if (ddlAlbuns.SelectedValue == "SINGLE")
+                    {
+                        cmd.Parameters.AddWithValue("@AlbumID", DBNull.Value);
+                    }
+                    else
+                    {
+                        if (int.TryParse(ddlAlbuns.SelectedValue, out int albumId))
+                        {
+                            cmd.Parameters.AddWithValue("@AlbumID", albumId);
                         }
                         else
                         {
-                            lblErrorDelete.Text = "Nenhuma música encontrada com esse nome ou autor.";
+                            lblMensagem.Text = "Seleção de álbum inválida.";
+                            return;
                         }
-                        lblErrorDelete.Visible = true;
+                    }
+
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        lblMensagem.Text = "Música adicionada com sucesso!";
+                    }
+                    catch (Exception ex)
+                    {
+                        lblMensagem.Text = "Ocorreu um erro ao adicionar a música: " + ex.Message;
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                lblErrorDelete.Text = "Erro ao deletar música: " + ex.Message;
-                lblErrorDelete.Visible = true;
-            }
         }
+
+
+
+
+
+
         protected void btnDeletarUsuario_Click(object sender, EventArgs e)
         {
             string username = txtUsuarioDelete.Text.Trim(); // Pegue o nome do usuário a ser deletado

@@ -57,7 +57,7 @@
             .music-image{
                 width: 200px; /* Tamanho da imagem */
                 height: 200px; /* Tamanho da imagem */
-                border-radius: 5%; 
+                border-radius: 2px; 
                 object-fit: cover; 
             }
 
@@ -72,18 +72,22 @@
     <div class="bodyPage">
 
 
-        <!-- Substituindo o GridView por um Repeater -->
+        <!-- -->
         <div class="artistGrid">
             <asp:Label ID="artTag" runat="server" class="artTag" Text="Artistas"></asp:Label>
             <asp:Repeater ID="ArtistRepeater" runat="server" DataSourceID="SqlDataSource1">
                 <ItemTemplate>
                     <div class="artist-container">
-                        <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("FotoBinario")) %>' class="artist-image" alt='<%# Eval("Nome") %>' />
+                        <a href='<%# "detalheArtista.aspx?nome=" + Server.UrlEncode(Eval("Nome").ToString()) %>'>
+                            <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("FotoBinario")) %>' class="artist-image" alt='<%# Eval("Nome") %>' />
+                        </a>
                         <h5 class="artist-name"><%# Eval("Nome") %></h5>
                     </div>
                 </ItemTemplate>
+
             </asp:Repeater>
         </div>
+
 
         <!--<div class="imgIcon1">
             <asp:Image ID="Image1" runat="server" class="icon1" ImageUrl="~/imgs/icon1.png" />
@@ -91,9 +95,9 @@
             <asp:Image ID="Image3" runat="server" class="icon1" ImageUrl="~/imgs/icon1.png" />
         </div>--!>
 
-        <!-- Substituindo o GridView por um Repeater -->
+        <!-- -->
         <div class="musicGrid">
-            <asp:Label ID="MscTag" runat="server" class="MscTag" Text="Música"></asp:Label>
+            <asp:Label ID="MscTag" runat="server" class="MscTag" Text="Músicas"></asp:Label>
             <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">
                 <ItemTemplate>
                     <div class="music-container">
@@ -115,6 +119,8 @@
         ConnectionString="<%$ ConnectionStrings:TuneRate %>" 
         SelectCommand="SELECT Titulo, Capa FROM Musicas">
     </asp:SqlDataSource>
+
+
 
 </asp:Content>
 

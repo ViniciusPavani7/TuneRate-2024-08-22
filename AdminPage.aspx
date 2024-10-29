@@ -53,49 +53,58 @@
             <asp:Label ID="lblMensagem" runat="server" ForeColor="Red"></asp:Label>
     </div>
 
-    <div id="Musics">
-        <h2>Músicas</h2>
-        <h3>Adicionar Música</h3>
-         <asp:TextBox ID="txtMscTitle" runat="server" placeholder="Titulo" />
-        <asp:TextBox ID="txtMscAuthor" runat="server" placeholder="Autor" />
-        <asp:TextBox ID="txtMscFeats" runat="server" placeholder="Feats." />
-        <asp:TextBox ID="txtMscGenre" runat="server" placeholder="Genero Musical"></asp:TextBox>
+    <div ID="Albuns">
+        <h3>Adicionar Álbum</h3>
+        <asp:TextBox ID="txtTituloAlbum" runat="server" placeholder="Título do Álbum" />
+        <asp:DropDownList ID="ddlArtistas" runat="server">
+            <asp:ListItem Text="Selecione um Artista" Value="0" />
+        </asp:DropDownList>
+        <asp:TextBox ID="txtDataLancamentoAlbum" runat="server" onkeyup="formatDate(this);" MaxLength="10" placeholder="Data de Lançamento" />
+        <asp:FileUpload ID="FileUploadCapa" runat="server" />
 
-        
-                <asp:TextBox ID="txtMscDate" runat="server" onkeyup="formatDate(this);" MaxLength="10" />
-
-                <script type="text/javascript">
-                    function formatDate(input) {
-                        // Remove todos os caracteres que não são números
-                        let value = input.value.replace(/[^0-9]/g, '');
-
-                        // Formata a data automaticamente
-                        if (value.length > 4) {
-                            value = value.slice(0, 4) + '-' + value.slice(4); // Adiciona o separador de ano
-                        }
-                        if (value.length > 7) {
-                            value = value.slice(0, 7) + '-' + value.slice(7); // Adiciona o separador de mês
-                        }
-
-                        input.value = value; // Atualiza o valor do input
-                    }
-                </script>
-        
-
-        <asp:FileUpload ID="ImageMscUpload" runat="server" />
-        <asp:Button ID="btnAddMusic" runat="server" Text="Adicionar Música" OnClick="btnAdicionarMusic_Click" />
+        <asp:Button ID="btnAdicionarAlbum" runat="server" Text="Adicionar Álbum" OnClick="btnAdicionarAlbum_Click" />
 
         <br />
-        <asp:Label ID="lblErrorAdd" runat="server" ForeColor="Red" Visible="false"></asp:Label>
-        <br />
-        <h3>Deletar Música</h3>
-            <label for="txtMscName">Nome ou ID, Nome da musica ou Artista:</label>
-            <asp:TextBox ID="txtDelete" runat="server"></asp:TextBox>
-            <br /><br />
-            <asp:Button ID="btnMscDelete" runat="server" Text="Deletar" OnClick="btnDeletarMusic_Click" />
-            <br /><br />
-            <asp:Label ID="lblErrorDelete" runat="server" ForeColor="Red"></asp:Label>
+        <asp:Label ID="LabelErrorAlbum" runat="server" ForeColor="Red" Visible="false"></asp:Label>
+
     </div>
+
+<div id="Musics">
+    <h2>Músicas</h2>
+    <h3>Adicionar Música</h3>
+
+    <!-- Campo para o título da música -->
+    <asp:TextBox ID="txtTitulo" runat="server" placeholder="Título"></asp:TextBox>
+
+
+    <!-- Campo para participações especiais (feats) -->
+    <asp:TextBox ID="txtFeats" runat="server" placeholder="Participações (Feats)"></asp:TextBox>
+
+
+    <!-- Campo para data de lançamento -->
+    <asp:TextBox ID="txtDataLancamento" runat="server" MaxLength="10" placeholder="Data de Lançamento (AAAA-MM-DD)"></asp:TextBox>
+ 
+
+    <!-- Upload de arquivo para a capa da música -->
+    <asp:FileUpload ID="FileUpload1" runat="server" />
+
+
+    <!-- Dropdown para selecionar o álbum ou single -->
+    <asp:DropDownList ID="ddlAlbuns" runat="server">
+        <asp:ListItem Value="SINGLE">SINGLE</asp:ListItem>
+    </asp:DropDownList>
+
+
+    <!-- Botão para adicionar a música -->
+    <asp:Button ID="btnAdicionarMusica" runat="server" Text="Adicionar Música" OnClick="btnAdicionarMusica_Click" />
+ 
+
+    <!-- Label para exibir mensagens de erro ou sucesso -->
+    <asp:Label ID="Label3" runat="server" ForeColor="Red"></asp:Label>
+</div>
+
+
+                    
 
     <div>
         <h3>Deletar Conta</h3>
@@ -119,7 +128,20 @@
     <div>
         <asp:DropDownList ID="ddlUsuarios" runat="server"></asp:DropDownList>
         <asp:Button ID="btnPraVirarAdmin" runat="server" Text="Tornar Admin" OnClick="btnPraVirarAdmin_Click" />
-        <!--<asp:Button ID="btnPraVirarMembro" runat="server" Text="Tornar Membro" OnClick="btnPraVirarMembro_Click" /> -->
         <asp:Label ID="Label2" runat="server" Visible="false" ForeColor="Green"></asp:Label>
     </div>
+
+                                      <script type="text/javascript">
+                                          function formatDate(input) {
+                                              let value = input.value.replace(/[^0-9]/g, '');
+                                              if (value.length > 4) {
+                                                  value = value.slice(0, 4) + '-' + value.slice(4);
+                                              }
+                                              if (value.length > 7) {
+                                                  value = value.slice(0, 7) + '-' + value.slice(7);
+                                              }
+                                              input.value = value;
+                                          }
+                                       </script>
+
 </asp:Content>

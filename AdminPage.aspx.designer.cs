@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------------
 // <gerado automaticamente>
-//     Esse código foi gerado por uma ferramenta.
+//     Este código foi gerado por uma ferramenta.
 //
 //     As alterações ao arquivo poderão causar comportamento incorreto e serão perdidas se
 //     o código for recriado
@@ -19,7 +19,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNome;
 
@@ -28,7 +28,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNacionalidade;
 
@@ -37,7 +37,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGeneroMusical;
 
@@ -46,7 +46,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDataNascimento;
 
@@ -55,7 +55,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FileUploadImagem;
 
@@ -64,7 +64,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAdicionarArtista;
 
@@ -73,7 +73,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelError;
 
@@ -82,7 +82,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNomeArtista;
 
@@ -91,7 +91,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDeletarArtista;
 
@@ -100,115 +100,133 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensagem;
 
         /// <summary>
-        /// Controle txtMscTitle.
+        /// Controle txtTituloAlbum.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMscTitle;
+        protected global::System.Web.UI.WebControls.TextBox txtTituloAlbum;
 
         /// <summary>
-        /// Controle txtMscAuthor.
+        /// Controle ddlArtistas.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMscAuthor;
+        protected global::System.Web.UI.WebControls.DropDownList ddlArtistas;
 
         /// <summary>
-        /// Controle txtMscFeats.
+        /// Controle txtDataLancamentoAlbum.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMscFeats;
+        protected global::System.Web.UI.WebControls.TextBox txtDataLancamentoAlbum;
 
         /// <summary>
-        /// Controle txtMscGenre.
+        /// Controle FileUploadCapa.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMscGenre;
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadCapa;
 
         /// <summary>
-        /// Controle txtMscDate.
+        /// Controle btnAdicionarAlbum.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMscDate;
+        protected global::System.Web.UI.WebControls.Button btnAdicionarAlbum;
 
         /// <summary>
-        /// Controle ImageMscUpload.
+        /// Controle LabelErrorAlbum.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ImageMscUpload;
+        protected global::System.Web.UI.WebControls.Label LabelErrorAlbum;
 
         /// <summary>
-        /// Controle btnAddMusic.
+        /// Controle txtTitulo.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddMusic;
+        protected global::System.Web.UI.WebControls.TextBox txtTitulo;
 
         /// <summary>
-        /// Controle lblErrorAdd.
+        /// Controle txtFeats.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorAdd;
+        protected global::System.Web.UI.WebControls.TextBox txtFeats;
 
         /// <summary>
-        /// Controle txtDelete.
+        /// Controle txtDataLancamento.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDelete;
+        protected global::System.Web.UI.WebControls.TextBox txtDataLancamento;
 
         /// <summary>
-        /// Controle btnMscDelete.
+        /// Controle FileUpload1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnMscDelete;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
 
         /// <summary>
-        /// Controle lblErrorDelete.
+        /// Controle ddlAlbuns.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorDelete;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAlbuns;
+
+        /// <summary>
+        /// Controle btnAdicionarMusica.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdicionarMusica;
+
+        /// <summary>
+        /// Controle Label3.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
         /// Controle Label1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
 
@@ -217,7 +235,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUsuarioDelete;
 
@@ -226,7 +244,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDeletarUsuario;
 
@@ -235,7 +253,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNovoUsuario;
 
@@ -244,7 +262,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNovaSenha;
 
@@ -253,7 +271,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
@@ -262,7 +280,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCriarConta;
 
@@ -271,7 +289,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensagemCriar;
 
@@ -280,7 +298,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlUsuarios;
 
@@ -289,25 +307,16 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPraVirarAdmin;
-
-        /// <summary>
-        /// Controle btnPraVirarMembro.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPraVirarMembro;
 
         /// <summary>
         /// Controle Label2.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
     }

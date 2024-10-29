@@ -7,92 +7,65 @@
 // </gerado automaticamente>
 //------------------------------------------------------------------------------
 
-namespace _2024_08_22_TuneRate
+namespace _2024_08_22_TuneRate.Detalhes
 {
 
 
-    public partial class WebForm1
+    public partial class detalheArtista
     {
 
         /// <summary>
-        /// Controle artTag.
+        /// Controle lblNomeArt.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label artTag;
+        protected global::System.Web.UI.WebControls.Label lblNomeArt;
 
         /// <summary>
-        /// Controle ArtistRepeater.
+        /// Controle fotoArt.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater ArtistRepeater;
+        protected global::System.Web.UI.WebControls.Image fotoArt;
 
         /// <summary>
-        /// Controle Image1.
+        /// Controle lblNation.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.Label lblNation;
 
         /// <summary>
-        /// Controle Image2.
+        /// Controle wikiLink.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image2;
+        protected global::System.Web.UI.WebControls.Literal wikiLink;
 
         /// <summary>
-        /// Controle Image3.
+        /// Controle AlbumRepeater.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image3;
+        protected global::System.Web.UI.WebControls.Repeater AlbumRepeater;
 
         /// <summary>
-        /// Controle MscTag.
+        /// Controle SqlDataSourceAlbuns.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MscTag;
-
-        /// <summary>
-        /// Controle Repeater2.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater2;
-
-        /// <summary>
-        /// Controle SqlDataSource1.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-
-        /// <summary>
-        /// Controle SqlDataSource2.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceAlbuns;
     }
 }
