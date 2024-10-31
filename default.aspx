@@ -35,7 +35,6 @@
                 overflow-x: auto; /* Adiciona rolagem horizontal se os itens ultrapassarem a largura da tela */
                 white-space: nowrap; /* Impede que os itens quebrem linha */
                 margin: 20px;
-                //padding-bottom: 1px; /* Para deixar um pouco de espaço na parte inferior */
                 padding-top: 20px;
             }
             .artist-container, .music-container { /* Estilo aplicado para ambos */
@@ -97,16 +96,19 @@
 
         <!-- -->
         <div class="musicGrid">
-            <asp:Label ID="MscTag" runat="server" class="MscTag" Text="Músicas"></asp:Label>
-            <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">
-                <ItemTemplate>
-                    <div class="music-container">
-                        <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("Capa")) %>' class="music-image" alt='<%# Eval("Titulo") %>' />
-                        <h5 class="music-title"><%# Eval("Titulo") %></h5>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
-        </div>
+    <asp:Label ID="MscTag" runat="server" class="MscTag" Text="Músicas"></asp:Label>
+    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">
+        <ItemTemplate>
+            <div class="music-container">
+                <!-- Link para detalheMusica.aspx com o título da música na URL -->
+                <a href='<%# "detalheMusica.aspx?nome=" + Server.UrlEncode(Eval("Titulo").ToString()) %>'>
+                    <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("Capa")) %>' class="music-image" alt='<%# Eval("Titulo") %>' />
+                    <h5 class="music-title"><%# Eval("Titulo") %></h5>
+                </a>
+            </div>
+        </ItemTemplate>
+    </asp:Repeater>
+</div>
 
     </div>
 

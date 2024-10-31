@@ -57,7 +57,7 @@ html, body {
 
 
     <div class="albumGrid">
-        <asp:Repeater ID="AlbumRepeater" runat="server" DataSourceID="SqlDataSourceAlbuns">
+        <asp:Repeater ID="AlbumRepeater" runat="server" DataSourceID="SqlDataSource1">
             <ItemTemplate>
                 <div class="album-container">
                      <a href='<%# "detalheAlbum.aspx?nome=" + Server.UrlEncode(Eval("Titulo").ToString()) %>'>
@@ -69,7 +69,7 @@ html, body {
         </asp:Repeater>
     </div>
 
-    <asp:SqlDataSource ID="SqlDataSourceAlbuns" runat="server"
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server"
         ConnectionString="<%$ ConnectionStrings:TuneRate %>"
         SelectCommand="SELECT Titulo, CapaBinaria FROM Albuns INNER JOIN Artistas ON Albuns.ArtistaId = Artistas.ArtistaID WHERE Artistas.Nome = @Nome">
         <SelectParameters>

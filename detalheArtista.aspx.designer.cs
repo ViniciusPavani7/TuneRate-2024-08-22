@@ -60,12 +60,12 @@ namespace _2024_08_22_TuneRate.Detalhes
         protected global::System.Web.UI.WebControls.Repeater AlbumRepeater;
 
         /// <summary>
-        /// Controle SqlDataSourceAlbuns.
+        /// Controle SqlDataSource1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceAlbuns;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
     }
 }

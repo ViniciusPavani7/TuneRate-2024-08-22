@@ -18,13 +18,46 @@ namespace _2024_08_22_TuneRate
         {
             if (!IsPostBack)
             {
-                // Carregar a lista de artistas no DropDownList
+                // Carregar a lista de artistas no DropDownList do artista principal
                 CarregarArtista();
+
+                // Carregar a lista de artistas no DropDownList de feats
+                CarregarFeats();
 
                 // Carregar a lista de álbuns no DropDownList
                 PreencherAlbuns();
             }
         }
+
+        private void CarregarFeats()
+        {
+            string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(conexao))
+            {
+                string sql = "SELECT ArtistaId, Nome FROM Artistas";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    // Limpar itens existentes
+                    ddlFeats.Items.Clear();
+
+                    // Adicionar item padrão
+                    ddlFeats.Items.Add(new ListItem("Selecione Participações (Feats)", "0"));
+
+                    // Preencher o DropDownList com os artistas
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string nome = reader.GetString(1);
+                        ddlFeats.Items.Add(new ListItem(nome, id.ToString()));
+                    }
+                }
+            }
+        }
+
 
         private void CarregarArtista()
         {
@@ -37,13 +70,27 @@ namespace _2024_08_22_TuneRate
                 {
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    ddlArtistas.DataSource = reader;
-                    ddlArtistas.DataTextField = "Nome";
-                    ddlArtistas.DataValueField = "ArtistaId";
-                    ddlArtistas.DataBind();
+
+                    // Limpar itens existentes
+                    ddlArtsAlb.Items.Clear();
+                    ddlArtsMsc.Items.Clear();
+
+                    // Adicionar item padrão
+                    ddlArtsAlb.Items.Add(new ListItem("Selecione um Artista", "0"));
+                    ddlArtsMsc.Items.Add(new ListItem("Selecione um Artista", "0"));
+
+                    // Preencher os DropDownLists com os artistas
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string nome = reader.GetString(1);
+                        ddlArtsAlb.Items.Add(new ListItem(nome, id.ToString()));
+                        ddlArtsMsc.Items.Add(new ListItem(nome, id.ToString()));
+                    }
                 }
             }
         }
+
 
         private void PreencherAlbuns()
         {
@@ -171,25 +218,6 @@ namespace _2024_08_22_TuneRate
             }
         }
 
-        private void CarregarArtistas()
-        {
-            string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
-
-            using (SqlConnection conn = new SqlConnection(conexao))
-            {
-                string sql = "SELECT ArtistaId, Nome FROM Artistas ORDER BY Nome";
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    ddlArtistas.DataSource = reader;
-                    ddlArtistas.DataTextField = "Nome";
-                    ddlArtistas.DataValueField = "ArtistaId";
-                    ddlArtistas.DataBind();
-                }
-            }
-        }
-
         protected void btnAdicionarAlbum_Click(object sender, EventArgs e)
         {
             string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
@@ -201,7 +229,7 @@ namespace _2024_08_22_TuneRate
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@Titulo", txtTituloAlbum.Text);
-                    cmd.Parameters.AddWithValue("@ArtistaId", ddlArtistas.SelectedValue);
+                    cmd.Parameters.AddWithValue("@ArtistaId", ddlArtsAlb.SelectedValue);
 
                     // Converter a data para o formato americano
                     if (DateTime.TryParse(txtDataLancamentoAlbum.Text, out DateTime dataLancamento))
@@ -250,14 +278,39 @@ namespace _2024_08_22_TuneRate
 
             using (SqlConnection conn = new SqlConnection(conexao))
             {
-                string sql = "INSERT INTO Musicas (Titulo, Feats, DataLancamento, DataAdicionado, Capa, AlbumID) VALUES (@Titulo, @Feats, @DataLancamento, @DataAdicionado, @Capa, @AlbumID)";
+                // Obter AlbumID a partir do DropDownList de álbuns
+                int albumId;
+                if (!int.TryParse(ddlAlbuns.SelectedValue, out albumId))
+                {
+                    lblMensagem.Text = "Seleção de álbum inválida.";
+                    return;
+                }
+
+                // Obter ArtistaID a partir do DropDownList do artista principal
+                int artistaId;
+                if (!int.TryParse(ddlArtsMsc.SelectedValue, out artistaId))
+                {
+                    lblMensagem.Text = "Seleção de artista inválida.";
+                    return;
+                }
+
+                // Obter o ArtistaID do DropDownList de feats
+                int featId;
+                if (!int.TryParse(ddlFeats.SelectedValue, out featId))
+                {
+                    lblMensagem.Text = "Seleção de feats inválida.";
+                    return;
+                }
+
+                // Inserir na tabela Musicas
+                string sql = "INSERT INTO Musicas (Titulo, Feats, DataLancamento, DataAdicionado, Capa, AlbumID, Artista) " +
+                             "VALUES (@Titulo, @Feats, @DataLancamento, @DataAdicionado, @Capa, @AlbumID, @Artista)";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@Titulo", txtTitulo.Text);
-                    cmd.Parameters.AddWithValue("@Feats", txtFeats.Text);
+                    cmd.Parameters.AddWithValue("@Feats", featId);  // Insere o ID do feat selecionado
 
-                    // Tenta converter a data de lançamento
                     if (DateTime.TryParse(txtDataLancamento.Text, out DateTime dataLancamento))
                     {
                         cmd.Parameters.AddWithValue("@DataLancamento", dataLancamento);
@@ -268,10 +321,8 @@ namespace _2024_08_22_TuneRate
                         return;
                     }
 
-                    // Data atual para DataAdicionado
                     cmd.Parameters.AddWithValue("@DataAdicionado", DateTime.Now);
 
-                    // Converte a imagem de capa para binário e especifica o tipo correto
                     if (FileUpload1.HasFile)
                     {
                         byte[] capaBytes;
@@ -286,23 +337,8 @@ namespace _2024_08_22_TuneRate
                         cmd.Parameters.Add("@Capa", SqlDbType.VarBinary).Value = DBNull.Value;
                     }
 
-                    // Define AlbumID como NULL se for single, ou usa o valor do álbum selecionado
-                    if (ddlAlbuns.SelectedValue == "SINGLE")
-                    {
-                        cmd.Parameters.AddWithValue("@AlbumID", DBNull.Value);
-                    }
-                    else
-                    {
-                        if (int.TryParse(ddlAlbuns.SelectedValue, out int albumId))
-                        {
-                            cmd.Parameters.AddWithValue("@AlbumID", albumId);
-                        }
-                        else
-                        {
-                            lblMensagem.Text = "Seleção de álbum inválida.";
-                            return;
-                        }
-                    }
+                    cmd.Parameters.AddWithValue("@AlbumID", albumId);
+                    cmd.Parameters.AddWithValue("@Artista", artistaId); // Usar o ArtistaID selecionado
 
                     try
                     {
@@ -317,6 +353,11 @@ namespace _2024_08_22_TuneRate
                 }
             }
         }
+
+
+
+
+
 
 
 

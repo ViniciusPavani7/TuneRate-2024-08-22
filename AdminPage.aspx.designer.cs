@@ -114,13 +114,13 @@ namespace _2024_08_22_TuneRate
         protected global::System.Web.UI.WebControls.TextBox txtTituloAlbum;
 
         /// <summary>
-        /// Controle ddlArtistas.
+        /// Controle ddlArtsAlb.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlArtistas;
+        protected global::System.Web.UI.WebControls.DropDownList ddlArtsAlb;
 
         /// <summary>
         /// Controle txtDataLancamentoAlbum.
@@ -168,13 +168,22 @@ namespace _2024_08_22_TuneRate
         protected global::System.Web.UI.WebControls.TextBox txtTitulo;
 
         /// <summary>
-        /// Controle txtFeats.
+        /// Controle ddlArtsMsc.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFeats;
+        protected global::System.Web.UI.WebControls.DropDownList ddlArtsMsc;
+
+        /// <summary>
+        /// Controle ddlFeats.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFeats;
 
         /// <summary>
         /// Controle txtDataLancamento.

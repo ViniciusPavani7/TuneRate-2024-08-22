@@ -56,7 +56,7 @@
     <div ID="Albuns">
         <h3>Adicionar Álbum</h3>
         <asp:TextBox ID="txtTituloAlbum" runat="server" placeholder="Título do Álbum" />
-        <asp:DropDownList ID="ddlArtistas" runat="server">
+        <asp:DropDownList ID="ddlArtsAlb" runat="server">
             <asp:ListItem Text="Selecione um Artista" Value="0" />
         </asp:DropDownList>
         <asp:TextBox ID="txtDataLancamentoAlbum" runat="server" onkeyup="formatDate(this);" MaxLength="10" placeholder="Data de Lançamento" />
@@ -76,28 +76,29 @@
     <!-- Campo para o título da música -->
     <asp:TextBox ID="txtTitulo" runat="server" placeholder="Título"></asp:TextBox>
 
+<!-- Campo para selecionar o artista principal -->
+<asp:DropDownList ID="ddlArtsMsc" runat="server">
+    <asp:ListItem Value="">Selecione um Artista</asp:ListItem>
+</asp:DropDownList>
 
-    <!-- Campo para participações especiais (feats) -->
-    <asp:TextBox ID="txtFeats" runat="server" placeholder="Participações (Feats)"></asp:TextBox>
-
+<!-- Campo para selecionar feats (participações especiais) -->
+<asp:DropDownList ID="ddlFeats" runat="server">
+    <asp:ListItem Value="">Selecione Participações (Feats)</asp:ListItem>
+</asp:DropDownList>
 
     <!-- Campo para data de lançamento -->
     <asp:TextBox ID="txtDataLancamento" runat="server" MaxLength="10" placeholder="Data de Lançamento (AAAA-MM-DD)"></asp:TextBox>
- 
 
     <!-- Upload de arquivo para a capa da música -->
     <asp:FileUpload ID="FileUpload1" runat="server" />
-
 
     <!-- Dropdown para selecionar o álbum ou single -->
     <asp:DropDownList ID="ddlAlbuns" runat="server">
         <asp:ListItem Value="SINGLE">SINGLE</asp:ListItem>
     </asp:DropDownList>
 
-
     <!-- Botão para adicionar a música -->
     <asp:Button ID="btnAdicionarMusica" runat="server" Text="Adicionar Música" OnClick="btnAdicionarMusica_Click" />
- 
 
     <!-- Label para exibir mensagens de erro ou sucesso -->
     <asp:Label ID="Label3" runat="server" ForeColor="Red"></asp:Label>
