@@ -25,23 +25,17 @@
         }
 
         .album-photo {
-            width: 300px;        /* Largura da imagem */
-            height: 300px;       /* Altura da imagem */
+            width: 400px;        /* Largura da imagem */
+            height: 400px;       /* Altura da imagem */
             object-fit: cover;   /* Ajusta a imagem para preencher o espaço */
             display: block;      /* Torna a imagem um bloco */
             margin: 0 auto;     /* Centraliza horizontalmente */
+            margin-top: 30px;
+            margin-bottom: 30px;
             border-radius: 3px;
         }
 
-        .divRight {
-            height: 100vh; /* 100% da altura da tela */
-            width: 70%;
-            float: right; /* Para que a div fique à esquerda */
-            background-color:  #000000;
-            overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder a altura da tela */
-        }
-
-                .gvMusicasSemBorda {
+         .gvMusicasSemBorda {
         width: 100%; /* Largura total */
     }
     
@@ -69,16 +63,16 @@
     }
 
     .gvMusicasSemBorda {
-    border: none;
-    border-collapse: collapse;
-    width: 100%;
-}
+        border: none;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-.gvMusicasSemBorda td,
-.gvMusicasSemBorda th,
-.gvMusicasSemBorda tr {
-    border: none;
-}
+    .gvMusicasSemBorda td,
+    .gvMusicasSemBorda th,
+    .gvMusicasSemBorda tr {
+        border: none;
+    }
 
     </style>
 </asp:Content>
