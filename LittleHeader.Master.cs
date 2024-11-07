@@ -15,18 +15,16 @@ namespace _2024_08_22_TuneRate
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             try
             {
                 string usuarioDoLogin = Session["UsuarioDoLogin"].ToString();
                 verificarTipoDeUsuario(usuarioDoLogin);
+                SetUserProfileImage(usuarioDoLogin); // Carregar a imagem de perfil
             }
             catch (Exception)
             {
-
-                //throw;
+                // Lidar com o erro (não é necessário lançar a exceção aqui)
             }
-
 
             // Verificar a página atual para ativar o menu correspondente
             string currentPage = Path.GetFileName(Request.Path);
@@ -93,7 +91,7 @@ namespace _2024_08_22_TuneRate
 
                         if (roleName != "Administrador")
                         {
-                            
+
                             ButtonAdmin.Visible = false;
                         }
 
@@ -113,16 +111,69 @@ namespace _2024_08_22_TuneRate
             }
         }
 
+        private void SetUserProfileImage(string usuarioDoLogin)
+        {
+            string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+            string SQL = "SELECT ProfilePicture FROM [TuneRate].[dbo].[UserProfilePictures] WHERE UserId = " +
+                         "(SELECT UserId FROM aspnet_Users WHERE UserName = @usuarioDoLogin)";
+
+            SqlConnection conn = null;
+            SqlDataReader dr = null;
+
+            try
+            {
+                conn = new SqlConnection(conexao);
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+
+                SqlCommand cmd = new SqlCommand(SQL, conn);
+                cmd.Parameters.AddWithValue("@usuarioDoLogin", usuarioDoLogin);
+                dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    // Lê os resultados
+                    while (dr.Read())
+                    {
+                        // Verifica se existe uma imagem de perfil para o usuário
+                        if (dr["ProfilePicture"] != DBNull.Value)
+                        {
+                            byte[] imageBytes = (byte[])dr["ProfilePicture"];
+                            string base64String = Convert.ToBase64String(imageBytes);
+                            imgPerfil.ImageUrl = "data:image/jpeg;base64," + base64String;  // Ajuste o tipo conforme necessário
+                        }
+                        else
+                        {
+                            imgPerfil.ImageUrl = "~/imgs/unknown.png";  // Imagem padrão caso não haja imagem
+                        }
+                    }
+                }
+                else
+                {
+                    imgPerfil.ImageUrl = "~/imgs/unknown.png";  // Imagem padrão se não encontrar o UserId na tabela
+                }
+            }
+            catch (Exception ex)
+            {
+                // Lidar com exceções, se necessário
+                imgPerfil.ImageUrl = "~/imgs/unknown.png";  // Imagem padrão em caso de erro
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         protected void ButtonPerfil_Click(object sender, EventArgs e)
         {
             // Redirecionar para a página de perfil
             Response.Redirect("Perfil.aspx");
-        }
-
-        protected void ButtonConfiguracoes_Click(object sender, EventArgs e)
-        {
-            // Redirecionar para a página de configurações
-            Response.Redirect("Configuracoes.aspx");
         }
 
         protected void ButtonLogout_Click(object sender, EventArgs e)

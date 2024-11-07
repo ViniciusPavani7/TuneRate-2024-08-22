@@ -15,15 +15,6 @@ namespace _2024_08_22_TuneRate.Detalhes
     {
 
         /// <summary>
-        /// Controle lblNomeArt.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNomeArt;
-
-        /// <summary>
         /// Controle fotoArt.
         /// </summary>
         /// <remarks>
@@ -31,6 +22,15 @@ namespace _2024_08_22_TuneRate.Detalhes
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image fotoArt;
+
+        /// <summary>
+        /// Controle lblNomeArt.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNomeArt;
 
         /// <summary>
         /// Controle lblNation.

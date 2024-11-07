@@ -47,6 +47,7 @@ a {
     font-family: 'Julee', cursive;
     font-weight: normal;
     font-size: 32px;
+    margin: 0px;
     margin-left: 10px;
 }
 
@@ -58,11 +59,12 @@ a {
     display: flex;
     align-items: center;
     padding-left: 50px;
+    height: 100px;
+    margin: 0px;
 }
 
 .navOption1:hover, .navOption2:hover, .navOption3:hover {
     color: #CF51CA;
-    /* Adicione outros estilos que deseja para o hover aqui */
 }
 
 .navigation a {
@@ -172,24 +174,25 @@ a {
             <!-- Caixa de busca -->
             <asp:TextBox ID="SearchBox" runat="server" class="search_box" AutoPostBack="True" placeholder="Pesquisar..."></asp:TextBox>
 
-            <!-- Dropdown do perfil -->
-            <div class="container mt-5">
-                <div class="dropdown">
-                    <!-- Imagem que abre o menu -->
-                    <a href="#" id="dropdownMenuButton" aria-expanded="false">
-                        <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
-                    </a>
+                <!-- Dropdown do perfil -->
+                <div class="container mt-5">
+                    <div class="dropdown">
+                        <!-- Imagem que abre o menu -->
+                        <a href="#" id="dropdownMenuButton" aria-expanded="false">
+                            <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
+                        </a>
 
-                    <!-- Menu de perfil -->
-                    <ul id="menuPerfil" class="dropdown-menu" runat="server" style="display: none;">
-                        <asp:Button ID="ButtonPerfil" runat="server" CssClass="dropdown-item" Text="Perfil" OnClick="ButtonPerfil_Click" />
-                        <asp:Button ID="ButtonSair" runat="server" CssClass="dropdown-item" Text="Sair" OnClick="ButtonLogout_Click" />
+                        <!-- Menu de perfil -->
+                        <ul id="menuPerfil" class="dropdown-menu" runat="server" style="display: none;">
+                            <asp:Button ID="ButtonPerfil" runat="server" CssClass="dropdown-item" Text="Perfil" OnClick="ButtonPerfil_Click" />
+                            <asp:Button ID="ButtonSair" runat="server" CssClass="dropdown-item" Text="Sair" OnClick="ButtonLogout_Click" />
 
-                        <!-- Botão Administração, visível apenas para administradores -->
-                        <asp:Button ID="ButtonAdmin" runat="server" CssClass="dropdown-item" Text="Administração" OnClick="ButtonAdmin_Click" Visible="false" />
-                    </ul>
+                            <!-- Botão Administração, visível apenas para administradores -->
+                            <asp:Button ID="ButtonAdmin" runat="server" CssClass="dropdown-item" Text="Administração" OnClick="ButtonAdmin_Click" Visible="false" />
+                        </ul>
+                    </div>
                 </div>
-            </div>
+
         </div>
 
         <!-- JavaScript para alternar a visibilidade do menu -->

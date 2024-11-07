@@ -16,17 +16,34 @@ html, body {
     float: left; /* Para que a div fique à esquerda */
     background-color:  #000000;
     overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder a altura da tela */
- border-right: 5px solid gray;
+ border-right: 2px solid gray;
 }
 
-.artist-photo {
-    width: 300px;        /* Largura da imagem */
-    height: 300px;       /* Altura da imagem */
-    object-fit: cover;   /* Ajusta a imagem para preencher o espaço */
-    display: block;      /* Torna a imagem um bloco */
-    margin: 0 auto;     /* Centraliza horizontalmente */
-    border-radius: 100%;
-}
+    .artist-details-container {
+        
+    }
+
+    .artist-photo {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+        border-radius: 100%;
+
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
+
+    .lblNomeArt {
+        font-size: 35px;
+        font-weight: bold; 
+        align-content: center;
+    }
+
+    .infoDiv {
+        padding-left: 50px;
+    }
 
 .divRight {
     height: 100vh; /* 100% da altura da tela */
@@ -34,6 +51,10 @@ html, body {
     float: right; /* Para que a div fique à esquerda */
     background-color:  #000000;
     overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder a altura da tela */
+
+    padding: 60px;
+    padding-top: 90px;
+    padding-bottom: 90px
 }
 
 
@@ -44,19 +65,22 @@ html, body {
 
     <div class="divLeft">
         <div class="artist-details-container">
-            <h1><asp:Label ID="lblNomeArt" runat="server" Text="Nome do Artista"></asp:Label></h1>
             <asp:Image ID="fotoArt" runat="server" CssClass="artist-photo" AlternateText="Foto do Artista" />
-            <p><strong>Nacionalidade:</strong> <asp:Label ID="lblNation" runat="server"></asp:Label></p>
 
-            <p><strong>Mais informações:</strong> 
-                <asp:Literal ID="wikiLink" runat="server"></asp:Literal>
-            </p>
+            <div class="infoDiv">
+                <asp:Label ID="lblNomeArt" runat="server" Text="Nome do Artista" CssClass="lblNomeArt"></asp:Label>
+                <p><strong>Nacionalidade:</strong> <asp:Label ID="lblNation" runat="server"></asp:Label></p>
+
+                <p><strong>Mais informações:</strong> 
+                    <asp:Literal ID="wikiLink" runat="server"></asp:Literal>
+                </p>
+            </div>
         </div>
     </div>
 
 
 
-    <div class="albumGrid">
+    <div class="divRight">
         <asp:Repeater ID="AlbumRepeater" runat="server" DataSourceID="SqlDataSource1">
             <ItemTemplate>
                 <div class="album-container">
