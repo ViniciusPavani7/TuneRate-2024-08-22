@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace _2024_08_22_TuneRate
 {
@@ -29,17 +30,13 @@ namespace _2024_08_22_TuneRate
             // Verificar a página atual para ativar o menu correspondente
             string currentPage = Path.GetFileName(Request.Path);
 
-            if (currentPage == "resenhas.aspx")
+            if (currentPage == "artistas.aspx")
             {
-                navOption1.Attributes.Add("class", "active");
+                navOption3.Attributes.Add("class", "active");
             }
             else if (currentPage == "albuns.aspx")
             {
                 navOption2.Attributes.Add("class", "active");
-            }
-            else if (currentPage == "artistas.aspx")
-            {
-                navOption3.Attributes.Add("class", "active");
             }
 
             // Verificar se o usuário está logado e se ele pertence ao role "Administrador"
@@ -187,6 +184,56 @@ namespace _2024_08_22_TuneRate
         {
             // Redirecionar para a página de administração
             Response.Redirect("AdminPage.aspx");
+        }
+
+        protected void Pesquisar(object sender, EventArgs e)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+            string textoDigitado = SearchBox.Text;
+
+            string query = @"
+        SELECT TOP 5 Titulo AS Resultado, 'Musica' AS Origem
+        FROM Musicas
+        WHERE Titulo LIKE '%' + @TextoDigitado + '%'
+        
+        UNION
+
+        SELECT TOP 5 Titulo AS Resultado, 'Album' AS Origem
+        FROM Albuns
+        WHERE Titulo LIKE '%' + @TextoDigitado + '%'
+        
+        UNION
+
+        SELECT TOP 5 Nome AS Resultado, 'Artista' AS Origem
+        FROM Artistas
+        WHERE Nome LIKE '%' + @TextoDigitado + '%';
+    ";
+
+            DataTable resultados = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@TextoDigitado", textoDigitado);
+                    connection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(resultados);
+                    }
+                }
+            }
+
+            if (resultados.Rows.Count > 0)
+            {
+                rptResultados.DataSource = resultados;
+                rptResultados.DataBind();
+                pnlResultados.Visible = true; // Mostra o painel de resultados
+            }
+            else
+            {
+                pnlResultados.Visible = false; // Oculta o painel se não houver resultados
+            }
         }
     }
 }

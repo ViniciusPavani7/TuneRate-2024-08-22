@@ -20,13 +20,33 @@
 
 
     <style>
+
         body{
-            background-color: #000000;
-             color: #ffffff;
+            margin: 0;
+            padding: 0;
+            border: 0;
+
+            background-color: black;
+            color: #ffffff;
+            padding-top: 100px !important;
         }
 
         link[rel="icon"] {
             border-radius: 50%;
+        }
+
+        .allContent{
+            display: flex;
+            flex-flow: column;
+            align-content: space-between;
+        }
+
+        .contentDiv{
+            max-width: 88%; /* Limita a largura máxima */
+            min-width: 88%;
+            min-height:100vh;
+            margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+            background-color: black;
         }
 
 .header {
@@ -36,6 +56,9 @@
     align-items: center;
     justify-content: space-between;
     background-color: #1C1C1C;
+
+    position: fixed;
+    top: 0px;
 }
 
 a {
@@ -66,9 +89,10 @@ a {
 .navigation {
     display: flex;
     align-items: center;
-    padding-left: 50px;
+    padding-left: 90px;
     height: 100px;
     margin: 0px;
+
 }
 
 .navOption1:hover, .navOption2:hover, .navOption3:hover {
@@ -86,17 +110,27 @@ a {
     text-decoration: none;
 }
 
+
+
+
+
 .search_box {
     height: 40px;
-    margin-left: 50px;
+    margin-left: 10vh;
     padding: 0 10px;
     font-size: 16px;
     background-color: #D9D9D9;
-    border: none;
+    border: 0;
     border-radius: 10px;
     vertical-align: middle;
-    width: 40%;
+    width: 100%;
 }
+
+
+
+
+
+
 
 .dropdown {
     position: fixed; 
@@ -110,12 +144,15 @@ a {
     z-index: 1000; /* Garante que fique acima de outros elementos */
 }
 
+.divPerfil {
+    display: flex;
+}
+
  .imgPerfil {
     height: 80px;
     width: 80px;
     border-radius: 50%; /* Deixa a imagem circular */
     cursor: pointer;
-    position: relative;
 }
 
 /* Estilização do dropdown-menu */
@@ -158,80 +195,182 @@ a {
     color: #ff0000; /* Cor da opção ativa */
 }
 
+            .footer {
+                background-color: #1C1C1C; /* Cor de fundo igual ao header */
+                color: #ffffff;
+                padding: 20px;
+                text-align: center;
+                width: 100%;
+                font-family: 'Julee', cursive;
+                font-size: 16px;
+                max-height: 100px;
+
+            }
+
+            .footer-content {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .footer-links {
+                list-style-type: none;
+                padding: 0;
+                margin-bottom: 10px;
+            }
+
+            .footer-links li {
+                display: inline;
+                margin: 0 15px;
+            }
+
+            .footer-links a {
+                color: #ffffff;
+                text-decoration: none;
+            }
+
+            .footer-links a:hover {
+                color: #CF51CA; /* Cor ao passar o mouse */
+            }
+
+            .footer p {
+                margin: 0;
+            }
+
+            .resultado-panel {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                max-width: 400px; /* ajustável */
+                background-color: #c1c1c1c1;
+                border: 1px solid #ddd;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                padding: 10px;
+            }
+
+            .resultado-item {
+                padding: 8px;
+                border-bottom: 1px solid #eee;
+            }
+
+            .resultado-item:last-child {
+                border-bottom: none;
+            }
+
+            .resultado-item:hover {
+                background-color: #c1c1c1c1;
+                cursor: pointer;
+            }
+
+
     </style>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
-    <form id="form1" runat="server">
-        <div class="header">  
-            <!-- Logo e título -->
-            <a href="default.aspx" class="logo_container">
-                <asp:Image ID="imgLogo" runat="server" class="logo_img" ImageUrl="~/imgs/TuneRate.png" />
-                <h1>TuneRate</h1>
-            </a>
+        <body>
+            <form id="form1" runat="server">
+                <div class="allContent">
+                
+                        <div class="header">  
+                            <!-- Logo e título -->
+                            <a href="default.aspx" class="logo_container">
+                                <asp:Image ID="imgLogo" runat="server" class="logo_img" ImageUrl="~/imgs/TuneRate.png" />
+                                <h1>TuneRate</h1>
+                            </a>
 
-            <!-- Barra de navegação -->
-            <ul class="navigation">
-                <a id="navOption1" runat="server" class="navOption1" href="resenhas.aspx"><li>Resenhas</li></a>
-                <a id="navOption2" runat="server" class="navOption2" href="albuns.aspx"><li>Álbuns</li></a>
-                <a id="navOption3" runat="server" class="navOption3" href="artistas.aspx"><li>Artistas</li></a>
-            </ul>
+                            <!-- Barra de navegação -->
+                            <ul class="navigation">
+                                <a id="navOption2" runat="server" class="navOption2" href="albuns.aspx"><li>Álbuns</li></a>
+                                <a id="navOption3" runat="server" class="navOption3" href="artistas.aspx"><li>Artistas</li></a>
+                            </ul>
 
-            <!-- Caixa de busca -->
-            <asp:TextBox ID="SearchBox" runat="server" class="search_box" AutoPostBack="True" placeholder="Pesquisar..."></asp:TextBox>
+                            <!-- Caixa de busca -->
+                            <asp:TextBox ID="SearchBox" runat="server" class="search_box" AutoPostBack="True" placeholder="Pesquisar..." OnTextChanged="Pesquisar"></asp:TextBox>
+                         
+                            <asp:Panel ID="pnlResultados" runat="server" CssClass="resultado-panel" Visible="False">
+                                <asp:Repeater ID="rptResultados" runat="server">
+                                    <ItemTemplate>
+                                        <div class="resultado-item">
+                                            <span><%# Eval("Resultado") %> - <%# Eval("Origem") %></span>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </asp:Panel>
 
-                <!-- Dropdown do perfil -->
-                <div class="container mt-5">
-                    <div class="dropdown">
-                        <!-- Imagem que abre o menu -->
-                        <a href="#" id="dropdownMenuButton" aria-expanded="false">
-                            <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
-                        </a>
+                            <asp:ListBox ID="lstResultados" runat="server" CssClass="result-list"></asp:ListBox>
 
-                        <!-- Menu de perfil -->
-                        <ul id="menuPerfil" class="dropdown-menu" runat="server" style="display: none;">
-                            <asp:Button ID="ButtonPerfil" runat="server" CssClass="dropdown-item" Text="Perfil" OnClick="ButtonPerfil_Click" />
-                            <asp:Button ID="ButtonSair" runat="server" CssClass="dropdown-item" Text="Sair" OnClick="ButtonLogout_Click" />
 
-                            <!-- Botão Administração, visível apenas para administradores -->
-                            <asp:Button ID="ButtonAdmin" runat="server" CssClass="dropdown-item" Text="Administração" OnClick="ButtonAdmin_Click" Visible="false" />
-                        </ul>
-                    </div>
+                                <!-- Dropdown do perfil -->
+                                <div class="container mt-5">
+                                    <div class="dropdown">
+
+                                        <div class="divPerfil">
+                                            <!-- Imagem que abre o menu -->
+                                            <a href="#" id="dropdownMenuButton" aria-expanded="false">
+                                                <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
+                                            </a>
+                                        </div>
+
+                                        <!-- Menu de perfil -->
+                                        <ul id="menuPerfil" class="dropdown-menu" runat="server" style="display: none;">
+                                            <asp:Button ID="ButtonPerfil" runat="server" CssClass="dropdown-item" Text="Perfil" OnClick="ButtonPerfil_Click" />
+                                            <asp:Button ID="ButtonSair" runat="server" CssClass="dropdown-item" Text="Sair" OnClick="ButtonLogout_Click" />
+
+                                            <!-- Botão Administração, visível apenas para administradores -->
+                                            <asp:Button ID="ButtonAdmin" runat="server" CssClass="dropdown-item" Text="Administração" OnClick="ButtonAdmin_Click" Visible="false" />
+                                        </ul>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <!-- JavaScript para alternar a visibilidade do menu -->
+                        <script>
+                            // Obtém os elementos do menu
+                            const imgPerfil = document.getElementById('<%= imgPerfil.ClientID %>');
+                            const menuPerfil = document.getElementById('menuPerfil');
+
+                            // Evento de clique para mostrar/ocultar o menu
+                            imgPerfil.addEventListener('click', function (e) {
+                                e.preventDefault(); // Previne o comportamento padrão
+
+                                // Alterna a visibilidade do menu
+                                if (menuPerfil.style.display === "none" || menuPerfil.style.display === "") {
+                                    menuPerfil.style.display = "block";
+                                } else {
+                                    menuPerfil.style.display = "none";
+                                }
+                            });
+
+                            // Fecha o menu ao clicar fora dele
+                            document.addEventListener('click', function (event) {
+                                if (!imgPerfil.contains(event.target) && !menuPerfil.contains(event.target)) {
+                                    menuPerfil.style.display = "none";
+                                }
+                            });
+                        </script>
+
+
+                <div class="contentDiv">
+            
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                             
+                        </asp:ContentPlaceHolder>
                 </div>
 
-        </div>
-
-        <!-- JavaScript para alternar a visibilidade do menu -->
-        <script>
-            // Obtém os elementos do menu
-            const imgPerfil = document.getElementById('<%= imgPerfil.ClientID %>');
-            const menuPerfil = document.getElementById('menuPerfil');
-
-            // Evento de clique para mostrar/ocultar o menu
-            imgPerfil.addEventListener('click', function (e) {
-                e.preventDefault(); // Previne o comportamento padrão
-
-                // Alterna a visibilidade do menu
-                if (menuPerfil.style.display === "none" || menuPerfil.style.display === "") {
-                    menuPerfil.style.display = "block";
-                } else {
-                    menuPerfil.style.display = "none";
-                }
-            });
-
-            // Fecha o menu ao clicar fora dele
-            document.addEventListener('click', function (event) {
-                if (!imgPerfil.contains(event.target) && !menuPerfil.contains(event.target)) {
-                    menuPerfil.style.display = "none";
-                }
-            });
-        </script>
-
-        <!-- Placeholder para conteúdo dinâmico -->
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-    </form>
-</body>
+                        <div>
+                            <footer class="footer">
+                                <div class="footer-content">
+                                    <ul class="footer-links">
+                                        <li><a href="default.aspx#about">Contato</a></li>
+                                        <li><a href="default.aspx#about">Sobre Nós</a></li>
+                                    </ul>
+                                    <p>&copy; 2024 TuneRate. Todos os direitos reservados.</p>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+            </form>
+        </body>
 </html>

@@ -63,34 +63,38 @@ html, body {
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="divLeft">
-        <div class="artist-details-container">
-            <asp:Image ID="fotoArt" runat="server" CssClass="artist-photo" AlternateText="Foto do Artista" />
+    <div>
 
-            <div class="infoDiv">
-                <asp:Label ID="lblNomeArt" runat="server" Text="Nome do Artista" CssClass="lblNomeArt"></asp:Label>
-                <p><strong>Nacionalidade:</strong> <asp:Label ID="lblNation" runat="server"></asp:Label></p>
+        <div class="divLeft">
+            <div class="artist-details-container">
+                <asp:Image ID="fotoArt" runat="server" CssClass="artist-photo" AlternateText="Foto do Artista" />
 
-                <p><strong>Mais informações:</strong> 
-                    <asp:Literal ID="wikiLink" runat="server"></asp:Literal>
-                </p>
+                <div class="infoDiv">
+                    <asp:Label ID="lblNomeArt" runat="server" Text="Nome do Artista" CssClass="lblNomeArt"></asp:Label>
+                    <p><strong>Nacionalidade:</strong> <asp:Label ID="lblNation" runat="server"></asp:Label></p>
+
+                    <p><strong>Mais informações:</strong> 
+                        <asp:Literal ID="wikiLink" runat="server"></asp:Literal>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
 
 
-    <div class="divRight">
-        <asp:Repeater ID="AlbumRepeater" runat="server" DataSourceID="SqlDataSource1">
-            <ItemTemplate>
-                <div class="album-container">
-                     <a href='<%# "detalheAlbum.aspx?nome=" + Server.UrlEncode(Eval("Titulo").ToString()) %>'>
-                    <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("CapaBinaria")) %>' class="album-image" alt='<%# Eval("Titulo") %>' />
-                     </a>
-                    <h5 class="album-title"><%# Eval("Titulo") %></h5>
-                </div>
-            </ItemTemplate>
-        </asp:Repeater>
+        <div class="divRight">
+            <asp:Repeater ID="AlbumRepeater" runat="server" DataSourceID="SqlDataSource1">
+                <ItemTemplate>
+                    <div class="album-container">
+                         <a href='<%# "detalheAlbum.aspx?nome=" + Server.UrlEncode(Eval("Titulo").ToString()) %>'>
+                        <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("CapaBinaria")) %>' class="album-image" alt='<%# Eval("Titulo") %>' />
+                         </a>
+                        <h5 class="album-title"><%# Eval("Titulo") %></h5>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+
     </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"
