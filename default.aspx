@@ -5,19 +5,29 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
 
     <style>
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
             body {
             padding: 0;
             margin: 0;
+
             }
             .bodyPage {
+                padding: 20px;
+                margin: 0;
             }
             .artTag, .MscTag {
+                display: flex; 
+                flex-direction: column;
+
                 font-weight: bold;
                 font-size: 35px;
                 max-height: 30px;
-                position:relative;
-                left: 180px;
-                bottom: 20px;
             }
             .imgIcon1 {
                 position: fixed;
@@ -30,13 +40,21 @@
             .icon1 {
                 height: 70px;
             }
-            .artistGrid,  .musicGrid {
+
+            .artistGrid, .musicGrid {
                 display: flex;
-                overflow-x: auto; /* Adiciona rolagem horizontal se os itens ultrapassarem a largura da tela */
-                white-space: nowrap; /* Impede que os itens quebrem linha */
-                margin: 20px;
+                flex-direction: column;
+                overflow-x: auto; 
+                white-space: nowrap; 
                 padding-top: 20px;
+                justify-content: flex-start;
             }
+
+            .repeater-div{
+                display:flex;
+
+            }
+
             .artist-container, .music-container { /* Estilo aplicado para ambos */
                 width: 220px; /* Largura de cada artista/música */
                 margin: 10px; /* Espaçamento entre os itens */
@@ -63,7 +81,8 @@
             .music-title, .artist-name {
                 margin-top: 5px;
                 font-size: 20px;
-            }            
+            }      
+            
     </style>
 </asp:Content>
 
@@ -73,18 +92,25 @@
 
         <!-- -->
         <div class="artistGrid">
-            <asp:Label ID="artTag" runat="server" class="artTag" Text="Artistas"></asp:Label>
-            <asp:Repeater ID="ArtistRepeater" runat="server" DataSourceID="SqlDataSource1">
-                <ItemTemplate>
-                    <div class="artist-container">
-                        <a href='<%# "detalheArtista.aspx?nome=" + Server.UrlEncode(Eval("Nome").ToString()) %>'>
-                            <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("FotoBinario")) %>' class="artist-image" alt='<%# Eval("Nome") %>' />
-                        </a>
-                        <h5 class="artist-name"><%# Eval("Nome") %></h5>
-                    </div>
-                </ItemTemplate>
+            <h2 class="artTag">Artistas</h2>
+                <div class="repeater-div">
+                <asp:Repeater ID="ArtistRepeater" runat="server" DataSourceID="SqlDataSource1">
 
-            </asp:Repeater>
+                    <ItemTemplate>
+
+                        <div class="artist-container">
+
+                            <a href='<%# "detalheArtista.aspx?nome=" + Server.UrlEncode(Eval("Nome").ToString()) %>'>
+                                <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("FotoBinario")) %>' class="artist-image" alt='<%# Eval("Nome").ToString() %>' />
+                            </a>
+                            <h5 class="artist-name"><%# Eval("Nome").ToString() %></h5>
+
+                        </div>
+
+                    </ItemTemplate>
+
+                </asp:Repeater>
+                </div>
         </div>
 
 
@@ -97,6 +123,7 @@
         <!-- -->
         <div class="musicGrid">
     <asp:Label ID="MscTag" runat="server" class="MscTag" Text="Músicas"></asp:Label>
+            <div class="repeater-div">
     <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">
         <ItemTemplate>
             <div class="music-container">
@@ -108,6 +135,7 @@
             </div>
         </ItemTemplate>
     </asp:Repeater>
+                </div>
 </div>
 
     </div>

@@ -18,7 +18,9 @@
             <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
         </asp:LinkButton>
 
+
         <!-- Painel de upload de imagem (invisível inicialmente) -->
+    <div>
         <asp:Panel ID="panelUpload" runat="server" Visible="false">
             <asp:FileUpload ID="FileUploadImagem" runat="server" />
             <asp:Button ID="Button1" runat="server" Text="Alterar Foto de Perfil" OnClick="btnAlterarFoto_Click" />
@@ -26,7 +28,7 @@
 
             <asp:Label ID="lblMensagem" runat="server" ForeColor="Red" />
         </asp:Panel>         
-
+     </div>
 
 </asp:Content>
 

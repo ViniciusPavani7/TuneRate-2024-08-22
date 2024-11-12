@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LittleHeader.Master" AutoEventWireup="true" CodeBehind="detalheMusica.aspx.cs" Inherits="_2024_08_22_TuneRate.detalheMusica" %>
+﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/LittleHeader.Master" AutoEventWireup="true" CodeBehind="detalheMusica.aspx.cs" Inherits="_2024_08_22_TuneRate.detalheMusica" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/jquery.raty.min.css" />
@@ -139,16 +139,21 @@
                         <asp:Button ID="btnEnviar" runat="server" Text="Enviar" OnClick="btnEnviar_Click" />
 
                         <br /><br />
+                            
+                    <div>
+                        <asp:Repeater ID="rptComentarios" runat="server" OnItemDataBound="rptComentarios_ItemDataBound" OnItemCommand="rptComentarios_ItemCommand">
+                            <ItemTemplate>
+                                <div class="comentario-item">
+                                    <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
+                                    <p><strong><%# Eval("Usuario") %>:</strong> <%# Eval("Comentario") %></p>
+                                    <p><small>Data: <%# Eval("Data", "{0:dd/MM/yyyy HH:mm}") %></small></p>
+                                    <p><strong>Avaliação: <%# Eval("Rating") %></strong></p>
+                                    <asp:Button ID="btnExcluir" runat="server" Text="Excluir" CommandName="Excluir" CommandArgument='<%# Eval("CommentID") %>' Visible="false" />
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
 
-                            <asp:Repeater ID="rptComentarios" runat="server">
-                                <ItemTemplate>
-                                    <div class="comentario-item">
-                                        <p><strong><%# Eval("Usuario") %>:</strong> <%# Eval("Comentario") %></p>
-                                        <p><small>Data: <%# Eval("Data", "{0:dd/MM/yyyy HH:mm}") %></small></p>
-                                        <p><strong>Avaliação: <%# Eval("Rating") %></strong></p>
-                                    </div>
-                                </ItemTemplate>
-                            </asp:Repeater>
 
                   <asp:Label ID="lblMensagemErro" runat="server" ForeColor="Red" Visible="false"></asp:Label>
               </div>

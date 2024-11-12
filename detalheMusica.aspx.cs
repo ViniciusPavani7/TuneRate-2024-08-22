@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -15,40 +16,190 @@ namespace _2024_08_22_TuneRate
         {
             if (!IsPostBack)
             {
-                // Obtém o título da música da URL
-                string titulo = Request.QueryString["nome"];
+                if (Session["UsuarioDoLogin"] != null)
+                {
+                    string usuarioDoLogin = Session["UsuarioDoLogin"].ToString();
+                    verificarTipoDeUsuario(usuarioDoLogin);
+                }
+                else
+                {
+                    // Lógica para usuário não autenticado, se necessário
+                }
 
+                string titulo = Request.QueryString["nome"];
                 if (!string.IsNullOrEmpty(titulo))
                 {
-                    // Define o texto do Label com o título da música
                     lblNomeMusica.Text = Server.UrlDecode(titulo);
-
-                    // Opcional: você também pode carregar outros detalhes da música
                     CarregarDetalhesMusica(titulo);
                 }
                 else
                 {
                     lblNomeMusica.Text = "Título da música não encontrado.";
                 }
+
+                CarregarComentarios();
+            }
+        }
+
+        protected void rptComentarios_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Button btnExcluir = (Button)e.Item.FindControl("btnExcluir");
+
+                string comentarioUserId = DataBinder.Eval(e.Item.DataItem, "UserID").ToString();
+                string usuarioLogado = Session["UsuarioDoLogin"]?.ToString();
+
+                if (!string.IsNullOrEmpty(usuarioLogado))
+                {
+                    bool ehAdministrador = verificarTipoDeUsuario(usuarioLogado);
+                    if (comentarioUserId == usuarioLogado || ehAdministrador)
+                    {
+                        btnExcluir.Visible = true;
+                    }
+                }
             }
         }
 
 
+        private bool verificarTipoDeUsuario(string usuarioDoLogin)
+        {
+            bool ehAdministrador = false;
+            string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+            string SQL = "SELECT ROLENAME " +
+                         "FROM aspnet_Users " +
+                         "INNER JOIN aspnet_UsersInRoles ON aspnet_UsersInRoles.UserId = aspnet_Users.UserId " +
+                         "INNER JOIN aspnet_Roles ON aspnet_Roles.RoleId = aspnet_UsersInRoles.RoleId " +
+                         "WHERE UserName = @usuarioDoLogin";
+
+            using (SqlConnection conn = new SqlConnection(conexao))
+            {
+                try
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(SQL, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@usuarioDoLogin", usuarioDoLogin);
+                        SqlDataReader dr = cmd.ExecuteReader();
+
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                string roleName = dr["ROLENAME"].ToString();
+                                if (roleName == "Administrador")
+                                {
+                                    ehAdministrador = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    // Tratar exceção se necessário
+                }
+            }
+
+            return ehAdministrador;
+        }
+
+        protected void rptComentarios_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Excluir")
+            {
+                int commentId = Convert.ToInt32(e.CommandArgument);
+
+                // Chama o método para excluir o comentário com base no ID
+                ExcluirComentario(commentId);
+
+                // Recarrega os comentários para atualizar a lista
+                CarregarComentarios();
+            }
+        }
+
+        private bool UsuarioEhAdministrador(string userId)
+        {
+            string roleIdAdmin = "780E493F-EC45-4860-A2A8-EBFAB1B392B0";
+            using (SqlConnection conn = new SqlConnection("TuneRate"))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT COUNT(1) FROM aspnet_UsersInRoles WHERE UserId = @UserId AND RoleId = @RoleId", conn);
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                cmd.Parameters.AddWithValue("@RoleId", roleIdAdmin);
+
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+        private void ExcluirComentario(int commentId)
+        {
+            string connectionString = "Server=localhost;Database=TuneRate;Integrated Security=True;";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "DELETE FROM COMENTARIOS WHERE CommentID = @CommentID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@CommentID", commentId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void SetUserProfileImage(Image imgPerfil, string usuarioDoLogin)
+        {
+            string conexao = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
+            string SQL = "SELECT ProfilePicture FROM [TuneRate].[dbo].[UserProfilePictures] WHERE UserId = " +
+                         "(SELECT UserId FROM aspnet_Users WHERE UserName = @usuarioDoLogin)";
+
+            using (SqlConnection conn = new SqlConnection(conexao))
+            {
+                try
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(SQL, conn);
+                    cmd.Parameters.AddWithValue("@usuarioDoLogin", usuarioDoLogin);
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows && dr.Read())
+                    {
+                        if (dr["ProfilePicture"] != DBNull.Value)
+                        {
+                            byte[] imageBytes = (byte[])dr["ProfilePicture"];
+                            string base64String = Convert.ToBase64String(imageBytes);
+                            imgPerfil.ImageUrl = "data:image/jpeg;base64," + base64String;
+                        }
+                        else
+                        {
+                            imgPerfil.ImageUrl = "~/imgs/unknown.png";
+                        }
+                    }
+                    else
+                    {
+                        imgPerfil.ImageUrl = "~/imgs/unknown.png";
+                    }
+                }
+                catch
+                {
+                    imgPerfil.ImageUrl = "~/imgs/unknown.png";
+                }
+            }
+        }
+
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
             string comentario = txtComentario.Text.Trim();
-            string nomeMusica = Request.QueryString["nome"]; // Obtém o nome da música da URL
+            string nomeMusica = Request.QueryString["nome"];
 
-            // Verifica se o comentário e o nome da música não são nulos ou vazios
             if (!string.IsNullOrEmpty(comentario) && !string.IsNullOrEmpty(nomeMusica))
             {
-                // Obtém o UserID do usuário autenticado
                 Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
-
-                // Obtém o MusicaID com base no nome da música da URL
                 int musicaId = ObterMusicaIDPorNome(nomeMusica);
 
-                // Verifica se o MusicaID foi encontrado no banco
                 if (musicaId != -1)
                 {
                     string connectionString = "Server=localhost;Database=TuneRate;Integrated Security=True;";
@@ -62,12 +213,12 @@ namespace _2024_08_22_TuneRate
                             cmd.Parameters.AddWithValue("@UserID", userId);
                             cmd.Parameters.AddWithValue("@Comentario", comentario);
                             cmd.Parameters.AddWithValue("@MusicaID", musicaId);
-                            cmd.Parameters.AddWithValue("@Rating", Convert.ToInt32(rblRating.SelectedValue)); // Captura o rating
+                            cmd.Parameters.AddWithValue("@Rating", Convert.ToInt32(rblRating.SelectedValue));
                             cmd.ExecuteNonQuery();
                         }
                     }
-                    txtComentario.Text = ""; // Limpa o campo de comentário após o envio
-                    CarregarComentarios(); // Recarrega a lista de comentários
+                    txtComentario.Text = "";
+                    CarregarComentarios();
                 }
                 else
                 {
@@ -82,17 +233,15 @@ namespace _2024_08_22_TuneRate
             }
         }
 
-
         private int ObterMusicaIDPorNome(string nomeMusica)
         {
-            // Se nomeMusica for nulo ou vazio, retorna -1
             if (string.IsNullOrEmpty(nomeMusica))
             {
                 return -1;
             }
 
             string connectionString = "Server=localhost;Database=TuneRate;Integrated Security=True;";
-            int musicaId = -1; // Valor padrão caso a música não seja encontrada
+            int musicaId = -1;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -100,10 +249,7 @@ namespace _2024_08_22_TuneRate
                 string query = "SELECT MusicaID FROM MUSICAS WHERE Titulo = @Titulo";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    // Adiciona o parâmetro @Nome
                     cmd.Parameters.AddWithValue("@Titulo", nomeMusica);
-
-                    // Executa a consulta e converte o resultado
                     object result = cmd.ExecuteScalar();
                     if (result != null)
                     {
@@ -115,13 +261,12 @@ namespace _2024_08_22_TuneRate
             return musicaId;
         }
 
-
         private void CarregarComentarios()
         {
             string nomeMusica = Request.QueryString["nome"];
             int musicaId = ObterMusicaIDPorNome(nomeMusica);
 
-            if (musicaId != -1) // Verifica se a música foi encontrada
+            if (musicaId != -1)
             {
                 string connectionString = "Server=localhost;Database=TuneRate;Integrated Security=True;";
 
@@ -129,11 +274,11 @@ namespace _2024_08_22_TuneRate
                 {
                     conn.Open();
                     string query = @"
-                SELECT u.UserName AS Usuario, c.Comentario, c.Data, c.Rating 
-                FROM COMENTARIOS c
-                INNER JOIN aspnet_Users u ON c.UserID = u.UserId
-                WHERE c.MusicaID = @MusicaID
-                ORDER BY c.Data DESC";
+            SELECT u.UserName AS Usuario, c.Comentario, c.Data, c.Rating, c.CommentID, c.UserID 
+            FROM COMENTARIOS c
+            INNER JOIN aspnet_Users u ON c.UserID = u.UserId
+            WHERE c.MusicaID = @MusicaID
+            ORDER BY c.Data DESC";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -153,6 +298,7 @@ namespace _2024_08_22_TuneRate
             }
         }
 
+
         private void CarregarDetalhesMusica(string titulo)
         {
             string connectionString = "Server=localhost;Database=TuneRate;Integrated Security=True;";
@@ -160,11 +306,11 @@ namespace _2024_08_22_TuneRate
             {
                 connection.Open();
                 string query = @"
-            SELECT m.Capa, a.AlbumID, a.Titulo AS AlbumTitulo, ar.Nome AS Artista, m.DataLancamento
-            FROM MUSICAS m
-            JOIN Albuns a ON m.AlbumID = a.AlbumID
-            JOIN Artistas ar ON m.Artista = ar.ArtistaID
-            WHERE m.Titulo = @Titulo";
+    SELECT m.Capa, a.AlbumID, a.Titulo AS AlbumTitulo, ar.Nome AS Artista, m.DataLancamento
+    FROM MUSICAS m
+    JOIN Albuns a ON m.AlbumID = a.AlbumID
+    JOIN Artistas ar ON m.Artista = ar.ArtistaID
+    WHERE m.Titulo = @Titulo";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -174,17 +320,13 @@ namespace _2024_08_22_TuneRate
                     {
                         if (reader.Read())
                         {
-                            // Atualiza o label com o link do álbum
                             int albumId = (int)reader["AlbumID"];
                             string albumTitulo = reader["AlbumTitulo"].ToString();
                             lblNomeAlb.Text = $"Álbum: <a href='detalheAlbum.aspx?nome={Server.UrlEncode(albumTitulo)}'>{albumTitulo}</a>";
-
-                            // Continua carregando as outras informações
                             lblAutor.Text = $"Autor: {reader["Artista"]}";
                             DateTime dataLancamento = Convert.ToDateTime(reader["DataLancamento"]);
                             AnoLancamento.Text = "Data de Lançamento: " + dataLancamento.ToString("dd/MM/yyyy");
 
-                            // Para a capa da música
                             byte[] capaBytes = reader["Capa"] as byte[];
                             if (capaBytes != null)
                             {
@@ -200,6 +342,7 @@ namespace _2024_08_22_TuneRate
                 }
             }
         }
+
 
 
 
