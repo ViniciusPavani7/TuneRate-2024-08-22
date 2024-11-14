@@ -218,6 +218,8 @@ namespace _2024_08_22_TuneRate
                     imgPerfil.ImageUrl = "~/imgs/unknown.png"; // Caso algum erro aconteça, usa a imagem padrão
                 }
             }
+
+            imgPerfil.DataBind(); // Garante que o controle é atualizado após a atribuição da imagem
         }
 
 

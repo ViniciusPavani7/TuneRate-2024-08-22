@@ -59,7 +59,7 @@
         }
 
         input[type="text"], input[type="password"] {
-            width: 100%;
+            width: 366px;
             padding: 15px;
             margin: 15px 0;
             border-radius: 5px;
@@ -93,7 +93,7 @@
 
         /* Link de cadastro */
         .createUserLink {
-            color: #000000; /* Cor preta */
+            color: white; /* Cor preta */
             font-weight: 500;
             text-decoration: none;
             display: inline-block;
@@ -139,3 +139,5 @@
     </form>
 </body>
 </html>
+
+

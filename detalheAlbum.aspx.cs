@@ -71,13 +71,13 @@ namespace _2024_08_22_TuneRate
                             albumId = reader.GetInt32(reader.GetOrdinal("AlbumID"));
 
                             // Exibe detalhes do álbum
-                            lblNomeAlb.Text = "Álbum: " + reader["Titulo"].ToString();
+                            lblNomeAlb.Text = "<b>Álbum:</b> " + reader["Titulo"].ToString();
 
                             DateTime dataLancamento = Convert.ToDateTime(reader["DataLancamento"]);
-                            AnoLancamento.Text = "Data de Lançamento: " + dataLancamento.ToString("dd/MM/yyyy");
+                            AnoLancamento.Text = "<b>Data de Lançamento:</b> " + dataLancamento.ToString("dd/MM/yyyy");
 
                             string nomeArtista = reader["Nome"].ToString();
-                            lblAutor.Text = $"Autor: <a href='detalheArtista.aspx?nome={Server.UrlEncode(nomeArtista)}'>{nomeArtista}</a>";
+                            lblAutor.Text = $"<b>Autor:</b> <a href='detalheArtista.aspx?nome={Server.UrlEncode(nomeArtista)}'>{nomeArtista}</a>";
 
                             byte[] capaBytes = reader["CapaBinaria"] as byte[];
                             if (capaBytes != null)

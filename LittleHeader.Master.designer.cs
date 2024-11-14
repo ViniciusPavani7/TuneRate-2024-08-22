@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------------
 // <gerado automaticamente>
-//     Esse código foi gerado por uma ferramenta.
+//     Este código foi gerado por uma ferramenta.
 //
 //     As alterações ao arquivo poderão causar comportamento incorreto e serão perdidas se
 //     o código for recriado
@@ -19,7 +19,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
 
@@ -28,7 +28,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
@@ -37,7 +37,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgLogo;
 
@@ -46,7 +46,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navOption2;
 
@@ -55,7 +55,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navOption3;
 
@@ -64,7 +64,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SearchBox;
 
@@ -73,7 +73,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlResultados;
 
@@ -82,16 +82,25 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptResultados;
+
+        /// <summary>
+        /// Controle lblNoResults.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoResults;
 
         /// <summary>
         /// Controle imgPerfil.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgPerfil;
 
@@ -100,7 +109,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuPerfil;
 
@@ -109,7 +118,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonPerfil;
 
@@ -118,7 +127,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonSair;
 
@@ -127,7 +136,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonAdmin;
 
@@ -136,7 +145,7 @@ namespace _2024_08_22_TuneRate
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
-        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
     }

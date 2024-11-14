@@ -37,22 +37,46 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-
-            display: grid;
-            grid-template-columns: 1fr; /* Garantir que tudo fique em uma única coluna */
-            grid-gap: 15px; /* Espaçamento entre os elementos */
         }
 
-        /* Estilo para o Button de Alterar Foto */
-        .btnAlterarFoto {
-            background-color: transparent; /* Sem fundo */
-            border: none;
-            color: #ffffff; /* Cor do texto */
-            padding: 10px 15px;
-            width: 100%; /* Ocupa toda a largura disponível */
-            cursor: pointer;
-            transition: all 0.3s ease; /* Transição suave para hover */
-        }
+        .divPerfilPerfil {
+    display: grid;
+    grid-template-columns: 200px min-content; /* Primeira coluna para a imagem, segunda coluna para as informações */
+    grid-template-rows: auto auto; /* Linhas automáticas para organizar os textos */
+    gap: 30px;
+    align-items: center; /* Centraliza verticalmente os elementos */
+}
+
+.imgPerfilPerfil {
+    grid-row: 1 / span 2; /* Faz a imagem ocupar duas linhas na primeira coluna */
+    height: 200px;
+    width: 200px;
+    border-radius: 50%; /* Torna a imagem circular */
+}
+
+.userNameLabel {
+    grid-column: 2; /* Coloca o nome de usuário na segunda coluna */
+    grid-row: 1; /* Primeira linha da segunda coluna */
+}
+
+.emailLabel {
+    grid-column: 3; /* Coloca o email na segunda coluna */
+    grid-row: 1; /* Segunda linha da segunda coluna */
+}
+
+.emailLabel, .userNameLabel{
+    font-size: 25px;
+}
+
+.btnAlterarFoto {
+background-color: transparent; /* Sem fundo */
+border: none;
+color: #ffffff; /* Cor do texto */
+padding: 10px 15px;
+width: 100%; /* Ocupa toda a largura disponível */
+cursor: pointer;
+transition: all 0.3s ease; /* Transição suave para hover */
+}
 
         /* Efeito de hover no botão */
         .btnAlterarFoto:hover {
@@ -224,7 +248,7 @@
             <div class="perfilDiv">
 
                 <div class="infoPerfil">
-                    <div class="divImgPerfil">
+                    <div class="divPerfilPerfil">
                         <asp:LinkButton ID="ShowMenu" runat="server" OnClientClick="mostrarDiv(event); return false;">
                             <asp:Image ID="imgPerfil" runat="server" class="imgPerfilPerfil" ImageUrl="~/imgs/unknown.png" />
                         </asp:LinkButton>
@@ -236,13 +260,12 @@
             </div>
 
              <div class="commentsArea">
-                 <asp:Repeater ID="rptComentarios" runat="server">
+                 <asp:Repeater ID="rptComentarios" runat="server" OnItemDataBound="rptComentarios_ItemDataBound">
                      <ItemTemplate>
                          <div class="comentario-item" onclick="window.location.href='<%# "detalheMusica.aspx?nome=" + Server.UrlEncode(Eval("Titulo").ToString()) %>';">
                             
                              <!-- A imagem de perfil -->
-                             <asp:Image ID="imgPerfil" runat="server" class="imgPerfil"  ImageUrl="~/imgs/unknown.png" />
- 
+                             <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
                              <!-- Outros campos do comentário -->
                              <p class="userName"><strong><%# Eval("Usuario") %></strong></p>
                              <p class="estrelinha">

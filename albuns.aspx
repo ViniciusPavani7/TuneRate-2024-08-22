@@ -68,7 +68,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
    <div class="albumGrid">
-   <asp:Label ID="albTag" runat="server" CssClass="albTag" Text="Album"></asp:Label>
+   <asp:Label ID="albTag" runat="server" CssClass="albTag" Text="Álbuns"></asp:Label>
        <div class="repeater-div">
        <asp:Repeater ID="AlbumRepeater" runat="server" DataSourceID="SqlDataSource1">
 

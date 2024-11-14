@@ -26,6 +26,8 @@ namespace _2024_08_22_TuneRate
 
                 // Carregar a lista de álbuns no DropDownList
                 PreencherAlbuns();
+
+                CarregarUsuarios();
             }
         }
 
@@ -353,16 +355,6 @@ namespace _2024_08_22_TuneRate
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
 
         protected void btnDeletarUsuario_Click(object sender, EventArgs e)
         {

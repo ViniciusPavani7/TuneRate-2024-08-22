@@ -228,11 +228,15 @@ namespace _2024_08_22_TuneRate
             {
                 rptResultados.DataSource = resultados;
                 rptResultados.DataBind();
-                pnlResultados.Visible = true; // Mostra o painel de resultados
+                pnlResultados.Visible = true;     // Mostra o painel de resultados
+                lblNoResults.Visible = false;     // Oculta a mensagem de "não encontrado"
             }
             else
             {
-                pnlResultados.Visible = false; // Oculta o painel se não houver resultados
+                rptResultados.DataSource = null;
+                rptResultados.DataBind();
+                pnlResultados.Visible = true;     // Exibe o painel para mostrar a mensagem
+                lblNoResults.Visible = true;      // Mostra a mensagem de "não encontrado"
             }
         }
 

@@ -59,7 +59,7 @@ namespace _2024_08_22_TuneRate.Detalhes
                             // Criar o link dinâmico para a Wikipedia usando o nome do artista
                             string nomeWiki = reader["Nome"].ToString().Replace(" ", "_"); // Substituir espaços por underline
                             string wikiUrl = $"https://pt.wikipedia.org/wiki/{nomeWiki}";
-                            wikiLink.Text = $"<a href='{wikiUrl}' target='_blank'>Ver na Wikipedia</a>";
+                            wikiLink.Text = $"<a href='{wikiUrl}' target='_blank'>Wikipedia</a>";
                         }
                         else
                         {

@@ -405,7 +405,7 @@ namespace _2024_08_22_TuneRate
                             string nomeArtista = reader["Artista"].ToString();
 
                             lblNomeAlb.Text = $"<b>Álbum:</b> <a href='detalheAlbum.aspx?nome={Server.UrlEncode(albumTitulo)}'>{albumTitulo}</a>";
-                            lblAutor.Text = $"<b>Autor:<b> <a href='detalheArtista.aspx?nome={Server.UrlEncode(nomeArtista)}'>{nomeArtista}</a>";
+                            lblAutor.Text = $"<b>Autor:</b> <a href='detalheArtista.aspx?nome={Server.UrlEncode(nomeArtista)}'>{nomeArtista}</a>";
                             DateTime dataLancamento = Convert.ToDateTime(reader["DataLancamento"]);
                             AnoLancamento.Text = "<b>Data de Lançamento:</b> " + dataLancamento.ToString("dd/MM/yyyy");
 

@@ -10,52 +10,81 @@ html, body {
     
 }
 
-.divLeft {
-    height: 100vh; /* 100% da altura da tela */
-    width: 30%; /* 40% da largura da tela */
-    float: left; /* Para que a div fique à esquerda */
-    background-color:  #000000;
-    overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder a altura da tela */
- border-right: 2px solid gray;
-}
+    .divLeft {
+            height: 100vh; /* 100% da altura da tela */
+            width: 30%; /* 30% da largura da tela */
+            float: left; /* Para que a div fique à esquerda */
+            overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder a altura da tela */
+            border-right: 3px solid #333; /* Borda direita para dividir */
+            padding: 20px; /* Adiciona um pouco de espaçamento interno */
+            box-sizing: border-box; /* Para que o padding seja incluído no cálculo da largura */
+            color: #fff; /* Cor do texto */
+
+     
+    }
 
     .artist-details-container {
-        
+            display: grid;
+            grid-template-rows: auto 400px auto;
+            grid-template-columns: auto;
+            gap: 15px;
     }
 
     .artist-photo {
-        width: 300px;
-        height: 300px;
-        object-fit: cover;
-        display: block;
-        margin: 0 auto;
-        border-radius: 100%;
+            max-width: 400px;   /* Limita a largura máxima da imagem */
+            height: 350px;      /* Altura da imagem */
+            object-fit: cover;   /* Ajusta a imagem para preencher o espaço */
+            display: block;      /* Torna a imagem um bloco */
+            margin: 0 10px 20px; /* Centraliza a imagem e coloca um espaçamento abaixo */
+            border-radius: 50%; /* Borda arredondada */
+            box-shadow: 0px 4px 6px rgba(169, 169, 169, 0.7); 
+            place-self: center;
 
-        margin-top: 20px;
-        margin-bottom: 15px;
+            grid-row: 2;
     }
 
     .lblNomeArt {
-        font-size: 35px;
-        font-weight: bold; 
-        align-content: center;
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 10px; /* Espaçamento abaixo */
+        color: #f1f1f1; /* Cor mais clara para o título */
+        text-align: center;
+
+        grid-row: 1;
     }
 
     .infoDiv {
-        padding-left: 50px;
+        font-size: 30px;
+        grid-row: 3;
     }
 
 .divRight {
-    height: 100vh; /* 100% da altura da tela */
-    width: 70%;
-    float: right; /* Para que a div fique à esquerda */
-    background-color:  #000000;
-    overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder a altura da tela */
+            height: 100vh; /* 100% da altura da tela */
+            max-width: 100%;
 
-    padding: 60px;
-    padding-top: 90px;
-    padding-bottom: 90px
+            background-color:  #000000;
+            overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder a altura da tela */
+            padding-left: 50px;
+            padding-top: 50px;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
 }
+
+
+.album-container{
+    text-align: center;
+    width: 250px;
+    height: 274px;
+}
+
+.album-image{
+    width: 250px;
+    height: 250px;
+    border-radius: 15px;
+}
+
 
 
     </style>
@@ -68,9 +97,9 @@ html, body {
         <div class="divLeft">
             <div class="artist-details-container">
                 <asp:Image ID="fotoArt" runat="server" CssClass="artist-photo" AlternateText="Foto do Artista" />
+                <asp:Label ID="lblNomeArt" runat="server" Text="Nome do Artista" CssClass="lblNomeArt"></asp:Label>
 
                 <div class="infoDiv">
-                    <asp:Label ID="lblNomeArt" runat="server" Text="Nome do Artista" CssClass="lblNomeArt"></asp:Label>
                     <p><strong>Nacionalidade:</strong> <asp:Label ID="lblNation" runat="server"></asp:Label></p>
 
                     <p><strong>Mais informações:</strong> 

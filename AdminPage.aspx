@@ -4,15 +4,33 @@
         body{
             padding: 0;
             margin: 0;
+        }
 
-           
+        .arts{
+            border: 1px solid gray;
+            margin-bottom: 10px;
+        }
+
+        .albuns{
+            border: 1px solid gray;
+            margin-bottom: 10px;
+        }
+
+        .musics{
+            border: 1px solid gray;
+            margin-bottom: 10px;
+        }
+
+        .users{
+            border: 1px solid gray;
+            margin-bottom: 10px;
         }
 
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div ID="Arts">
+    <div ID="Arts" class="arts">
         <h2>Artistas</h2>
         <h3>Adicionar Artista</h3>
         <asp:TextBox ID="txtNome" runat="server" placeholder="Nome" />
@@ -55,7 +73,7 @@
             <asp:Label ID="lblMensagem" runat="server" ForeColor="Red"></asp:Label>
     </div>
 
-    <div ID="Albuns">
+    <div ID="Albuns" class="albuns">
         <h3>Adicionar Álbum</h3>
         <asp:TextBox ID="txtTituloAlbum" runat="server" placeholder="Título do Álbum" />
         <asp:DropDownList ID="ddlArtsAlb" runat="server">
@@ -71,7 +89,7 @@
 
     </div>
 
-<div id="Musics">
+<div id="Musics" class="musics">
     <h2>Músicas</h2>
     <h3>Adicionar Música</h3>
 
@@ -108,30 +126,33 @@
 
 
                     
+    <div class="users">
 
-    <div>
-        <h3>Deletar Conta</h3>
-        <asp:Label ID="Label1" runat="server" Text="" />
-        <br />
-        <label for="txtUsuarioDelete">Digite o Nome de Usuário:</label>
-        <asp:TextBox ID="txtUsuarioDelete" runat="server" />
-        <br />
-        <asp:Button ID="btnDeletarUsuario" runat="server" Text="Deletar Usuário" OnClick="btnDeletarUsuario_Click" />
-    </div>
+        <div>
+            <h3>Criar Conta</h3>
+            <asp:TextBox ID="txtNovoUsuario" runat="server" placeholder="Nome de Usuário" />
+            <asp:TextBox ID="txtNovaSenha" runat="server" TextMode="Password" placeholder="Senha" />
+            <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" />
+            <asp:Button ID="btnCriarConta" runat="server" Text="Criar Conta" OnClick="btnCriarConta_Click" />
+            <asp:Label ID="lblMensagemCriar" runat="server" ForeColor="Green" Visible="false"></asp:Label>
+        </div>
 
-    <div>
-        <h3>Criar Conta</h3>
-        <asp:TextBox ID="txtNovoUsuario" runat="server" placeholder="Nome de Usuário" />
-        <asp:TextBox ID="txtNovaSenha" runat="server" TextMode="Password" placeholder="Senha" />
-        <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" />
-        <asp:Button ID="btnCriarConta" runat="server" Text="Criar Conta" OnClick="btnCriarConta_Click" />
-        <asp:Label ID="lblMensagemCriar" runat="server" ForeColor="Green" Visible="false"></asp:Label>
-    </div>
+        <div>
+            <h3>Deletar Conta</h3>
+            <asp:Label ID="Label1" runat="server" Text="" />
+            <br />
+            <label for="txtUsuarioDelete">Digite o Nome de Usuário:</label>
+            <asp:TextBox ID="txtUsuarioDelete" runat="server" />
+            <br />
+            <asp:Button ID="btnDeletarUsuario" runat="server" Text="Deletar Usuário" OnClick="btnDeletarUsuario_Click" />
+        </div>
 
-    <div>
-        <asp:DropDownList ID="ddlUsuarios" runat="server"></asp:DropDownList>
-        <asp:Button ID="btnPraVirarAdmin" runat="server" Text="Tornar Admin" OnClick="btnPraVirarAdmin_Click" />
-        <asp:Label ID="Label2" runat="server" Visible="false" ForeColor="Green"></asp:Label>
+        <div>
+            <asp:DropDownList ID="ddlUsuarios" runat="server"></asp:DropDownList>
+            <asp:Button ID="btnPraVirarAdmin" runat="server" Text="Tornar Admin" OnClick="btnPraVirarAdmin_Click" />
+            <asp:Label ID="Label2" runat="server" Visible="false" ForeColor="Green"></asp:Label>
+        </div>
+
     </div>
 
                                       <script type="text/javascript">

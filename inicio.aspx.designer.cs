@@ -11,34 +11,43 @@ namespace _2024_08_22_TuneRate
 {
 
 
-    public partial class albuns
+    public partial class inicio
     {
 
         /// <summary>
-        /// Controle albTag.
+        /// Controle form1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label albTag;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Controle AlbumRepeater.
+        /// Controle Image1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater AlbumRepeater;
+        protected global::System.Web.UI.WebControls.Image Image1;
 
         /// <summary>
-        /// Controle SqlDataSource1.
+        /// Controle Image2.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.Image Image2;
+
+        /// <summary>
+        /// Controle Image3.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image3;
     }
 }

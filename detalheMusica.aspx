@@ -12,43 +12,41 @@
         }
 
         .divLeft {
-    height: 100vh; /* 100% da altura da tela */
-    width: 30%; /* 30% da largura da tela */
-    float: left; /* Para que a div fique à esquerda */
-    overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder a altura da tela */
-    border-right: 5px solid #333; /* Borda direita para dividir */
-    padding: 20px; /* Adiciona um pouco de espaçamento interno */
-    box-sizing: border-box; /* Para que o padding seja incluído no cálculo da largura */
-    color: #fff; /* Cor do texto */
-}
+            height: 100vh; /* 100% da altura da tela */
+            width: 30%; /* 30% da largura da tela */
+            float: left; /* Para que a div fique à esquerda */
+            overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder a altura da tela */
+            border-right: 3px solid #333; /* Borda direita para dividir */
+            padding: 20px; /* Adiciona um pouco de espaçamento interno */
+            box-sizing: border-box; /* Para que o padding seja incluído no cálculo da largura */
+            color: #fff; /* Cor do texto */
+        }
 
         .musica-photo {
-    width: 100%;        /* Largura da imagem em 100% do container */
-    max-width: 400px;   /* Limita a largura máxima da imagem */
-    height: 400px;      /* Altura da imagem */
-    object-fit: cover;   /* Ajusta a imagem para preencher o espaço */
-    display: block;      /* Torna a imagem um bloco */
-    margin: 0 10px 20px; /* Centraliza a imagem e coloca um espaçamento abaixo */
-    border-radius: 10px; /* Borda arredondada */
-    box-shadow: 0px 4px 6px rgba(169, 169, 169, 0.7); 
-}
+            width: 100%;        /* Largura da imagem em 100% do container */
+            max-width: 400px;   /* Limita a largura máxima da imagem */
+            height: 400px;      /* Altura da imagem */
+            object-fit: cover;   /* Ajusta a imagem para preencher o espaço */
+            display: block;      /* Torna a imagem um bloco */
+            margin: 0 10px 20px; /* Centraliza a imagem e coloca um espaçamento abaixo */
+            border-radius: 10px; /* Borda arredondada */
+            box-shadow: 0px 4px 6px rgba(169, 169, 169, 0.7); 
+        }
 
         .infoMusic {
-    font-size: 30px;
-}
+            font-size: 30px;
+        }
 
         #lblNomeAlb {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px; /* Espaçamento abaixo */
-    color: #f1f1f1; /* Cor mais clara para o título */
-}
+            font-size: 1.5rem;
+            margin-bottom: 10px; /* Espaçamento abaixo */
+            color: #f1f1f1; /* Cor mais clara para o título */
+        }
 
         #lblAutor, #AnoLancamento {
-    font-size: 1.1rem;
-    color: #ccc; /* Cor suave para texto secundário */
-    margin-bottom: 8px; /* Adiciona espaçamento entre os itens */
-}
+            font-size: 1.1rem;
+            margin-bottom: 8px; /* Adiciona espaçamento entre os itens */
+        }
 
         .divRight {
             height: 100vh; /* 100% da altura da tela */
@@ -223,9 +221,9 @@
                 <div class="infoMusic">
                     <asp:Literal ID="lblNomeAlb" runat="server"></asp:Literal>
                     <br />
-                    <asp:Label ID="lblAutor" runat="server" Text="Autor: "></asp:Label>
+                    <asp:Label ID="lblAutor" runat="server" ></asp:Label>
                     <br />
-                    <asp:Label ID="AnoLancamento" runat="server" Text="Data de Lançamento: "></asp:Label>
+                    <asp:Label ID="AnoLancamento" runat="server"></asp:Label>
                 </div>
             </div>
         </div>

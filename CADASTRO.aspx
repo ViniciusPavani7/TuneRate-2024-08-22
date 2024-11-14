@@ -36,13 +36,7 @@
         }
 
         form {
-            width: 400px;
-            background-color: rgba(255, 255, 255, 0.13);
-            border-radius: 10px;
-            padding: 50px 35px;
-            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-            text-align: center;
-            backdrop-filter: blur(10px);
+            
         }
 
         /* Título */
@@ -50,7 +44,7 @@
             font-size: 32px;
             font-weight: 500;
             color: #A458DC;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
 
         /* Estilo dos rótulos e inputs */
@@ -60,13 +54,11 @@
             font-weight: 500;
             color: #ffffff;
             text-align: left;
-            margin-top: 20px;
         }
 
         input[type="text"], input[type="password"] {
             width: 100%;
             padding: 15px;
-            margin-top: 10px;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.07);
             color: #FFF;
@@ -80,7 +72,6 @@
 
         /* Botão de Cadastro */
         .registerBtn {
-            margin-top: 30px;
             width: 100%;
             padding: 15px;
             background-color: #391477;
@@ -104,33 +95,93 @@
             margin-top: 5px;
             text-align: left;
         }
+
+        .painelCad{
+            display: grid;
+            grid-template-rows: 100px 100px 100px 100px 100px 80px;
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.13);
+            border-radius: 10px;
+            padding: 50px 35px;
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            text-align: center;
+            backdrop-filter: blur(10px);
+
+            height: 640px;
+        }
+
+        .tagCad{
+            grid-row: 1;
+            height: 50px;
+        }
+
+        .userName{
+            grid-row: 2;
+            height: 100px;
+        }
+
+        .password1{
+            grid-row: 3;
+            height: 100px;
+        }
+
+        .password2{
+            grid-row: 4;
+            height: 100px;
+        }
+
+        .email{
+            grid-row: 5;
+            height: 100px;
+        }
+
+        .btnRegister{
+            grid-row: 6;
+            height: 100px;
+        }
+
     </style>
 </head>
 
 <body>
     <form runat="server">
-        <h3>Cadastre-se já!</h3>
+        <div class="painelCad">
+        <h3 class="tagCad">Cadastre-se já!</h3>
 
-        <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" Text="Nome do Usuário:"></asp:Label>
-        <asp:TextBox ID="UserName" runat="server" CssClass="inputField" MaxLength="23" placeholder="Nome do Usuário"></asp:TextBox>
-        <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="O Nome do Usuário é necessário." CssClass="errorMessage" ValidationGroup="CreateUserWizard1" />
+            <div class="userName">
+                <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" Text="Nome do Usuário:"></asp:Label>
+                <asp:TextBox ID="UserName" runat="server" CssClass="inputField" MaxLength="23" placeholder="Nome do Usuário"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="O Nome do Usuário é necessário." CssClass="errorMessage" ValidationGroup="CreateUserWizard1" />
+            </div>
 
-        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" Text="Senha:"></asp:Label>
-        <asp:TextBox ID="Password" runat="server" CssClass="inputField" TextMode="Password" MaxLength="15" placeholder="Senha"></asp:TextBox>
-        <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" ErrorMessage="A senha é necessária." CssClass="errorMessage" ValidationGroup="CreateUserWizard1" />
+            <div class="password1">
+                <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" Text="Senha:"></asp:Label>
+                <asp:TextBox ID="Password" runat="server" CssClass="inputField" TextMode="Password" MaxLength="15" placeholder="Senha"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" ErrorMessage="A senha é necessária." CssClass="errorMessage" ValidationGroup="CreateUserWizard1" />
+            </div>
 
-        <asp:Label ID="ConfirmPasswordLabel" runat="server" AssociatedControlID="ConfirmPassword" Text="Confirmar Senha:"></asp:Label>
-        <asp:TextBox ID="ConfirmPassword" runat="server" CssClass="inputField" TextMode="Password" MaxLength="15" placeholder="Confirmar Senha"></asp:TextBox>
-        <asp:RequiredFieldValidator ID="ConfirmPasswordRequired" runat="server" ControlToValidate="ConfirmPassword" ErrorMessage="É necessário confirmar a senha." CssClass="errorMessage" ValidationGroup="CreateUserWizard1" />
-        <asp:CompareValidator ID="PasswordCompare" runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword" ErrorMessage="A senha e a confirmação devem coincidir." CssClass="errorMessage" ValidationGroup="CreateUserWizard1" />
+            <div class="password2">
+                <asp:Label ID="ConfirmPasswordLabel" runat="server" AssociatedControlID="ConfirmPassword" Text="Confirmar Senha:"></asp:Label>
+                <asp:TextBox ID="ConfirmPassword" runat="server" CssClass="inputField" TextMode="Password" MaxLength="15" placeholder="Confirmar Senha"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="ConfirmPasswordRequired" runat="server" ControlToValidate="ConfirmPassword" ErrorMessage="É necessário confirmar a senha." CssClass="errorMessage" ValidationGroup="CreateUserWizard1" />
+                <asp:CompareValidator ID="PasswordCompare" runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword" ErrorMessage="A senha e a confirmação devem coincidir." CssClass="errorMessage" ValidationGroup="CreateUserWizard1" />
+            </div>
 
-        <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Email" Text="Email:"></asp:Label>
-        <asp:TextBox ID="Email" runat="server" CssClass="inputField" placeholder="Email"></asp:TextBox>
-        <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="Email" ErrorMessage="O email é necessário." CssClass="errorMessage" ValidationGroup="CreateUserWizard1" />
+            <div class="email">
+                <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Email" Text="Email:"></asp:Label>
+                <asp:TextBox ID="Email" runat="server" CssClass="inputField" placeholder="Email"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="Email" ErrorMessage="O email é necessário." CssClass="errorMessage" ValidationGroup="CreateUserWizard1" />
+            </div>
 
-        <asp:Button ID="RegisterButton" runat="server" Text="Cadastrar" CssClass="registerBtn" ValidationGroup="CreateUserWizard1" />
-        
-        <asp:Literal ID="ErrorMessage" runat="server" EnableViewState="False" ></asp:Literal>
+            <div class="btnRegister">
+                <asp:Button ID="RegisterButton" runat="server" Text="Cadastrar" CssClass="registerBtn" ValidationGroup="CreateUserWizard1" />
+            </div>
+
+            <div>
+                <asp:Literal ID="ErrorMessage" runat="server" EnableViewState="False" ></asp:Literal>
+            </div>
+
+        </div>
     </form>
 </body>
 </html>
