@@ -263,7 +263,7 @@
                 </div>
                             
                 <div class="commentsArea">
-                    <asp:Repeater ID="rptComentarios" runat="server" OnItemDataBound="rptComentarios_ItemDataBound">
+                    <asp:Repeater ID="rptComentarios" runat="server" OnItemDataBound="rptComentarios_ItemDataBound" OnItemCommand="rptComentarios_ItemCommand">
                         <ItemTemplate>
                             <div class="comentario-item">
                                 <!-- A imagem de perfil -->

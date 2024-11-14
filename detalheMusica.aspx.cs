@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -49,8 +51,7 @@ namespace _2024_08_22_TuneRate
                     lblNomeMusica.Text = "Título da música não encontrado."; // Caso o título não seja fornecido
                 }
 
-                // Carregar os comentários da música
-                CarregarComentarios(); // Exibe os comentários relacionados à música
+                CarregarComentarios(); 
             }
         }
 
@@ -166,12 +167,13 @@ namespace _2024_08_22_TuneRate
         {
             if (e.CommandName == "Excluir")
             {
+                // Obtém o ID do comentário a partir do CommandArgument
                 int commentId = Convert.ToInt32(e.CommandArgument);
 
                 // Chama o método para excluir o comentário com base no ID
                 ExcluirComentario(commentId);
 
-                // Recarrega os comentários para atualizar a lista
+                // Recarrega os comentários após a exclusão
                 CarregarComentarios();
             }
         }
@@ -194,7 +196,7 @@ namespace _2024_08_22_TuneRate
 
         private void ExcluirComentario(int commentId)
         {
-            string connectionString = "Server=localhost;Database=TuneRate;Integrated Security=True;";
+            string connectionString = ConfigurationManager.ConnectionStrings["TuneRate"].ConnectionString;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
