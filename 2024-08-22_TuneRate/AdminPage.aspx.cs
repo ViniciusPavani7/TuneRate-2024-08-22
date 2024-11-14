@@ -166,7 +166,7 @@ namespace _2024_08_22_TuneRate
                     {
                         conn.Open();
                         cmd.ExecuteNonQuery();
-                        LabelError.Visible = false; // Limpa a mensagem de erro se a inserção for bem-sucedida
+                        LabelError.Visible = false;                     // Limpa a mensagem de erro se a inserção for bem-sucedida
                     }
                     catch (Exception ex)
                     {
