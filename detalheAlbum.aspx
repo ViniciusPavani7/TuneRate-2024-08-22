@@ -32,7 +32,7 @@
             margin: 0 auto;     /* Centraliza horizontalmente */
             margin-top: 30px;
             margin-bottom: 30px;
-            border-radius: 3px;
+            border-radius: 10px;
         }
 
          .gvMusicasSemBorda {

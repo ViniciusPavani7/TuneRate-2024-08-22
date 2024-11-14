@@ -235,5 +235,21 @@ namespace _2024_08_22_TuneRate
                 pnlResultados.Visible = false; // Oculta o painel se não houver resultados
             }
         }
+
+        protected string GerarLink(string origem, string resultado)
+        {
+            switch (origem)
+            {
+                case "Musica":
+                    return $"detalheMusica.aspx?nome={Server.UrlEncode(resultado)}";
+                case "Album":
+                    return $"detalheAlbum.aspx?nome={Server.UrlEncode(resultado)}";
+                case "Artista":
+                    return $"detalheArtista.aspx?nome={Server.UrlEncode(resultado)}";
+                default:
+                    return "#"; // Link vazio caso a origem não corresponda a nenhum tipo
+            }
+        }
+
     }
 }

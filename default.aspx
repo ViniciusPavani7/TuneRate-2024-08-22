@@ -4,7 +4,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
 
-    <style>
+<style>
 
             * {
                 margin: 0;
@@ -154,7 +154,7 @@
             color: #ffffff;
         }
             
-    </style>
+</style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

@@ -7,6 +7,15 @@
             margin: 0;
         }
 
+        .backgroudNavOption3{
+            display: flex;
+            justify-content: center;  
+            align-items: center; 
+            height: 100px;
+            background-color: #2b2b2b;
+            
+        }
+
         .artTag {
                 display: flex; 
                 flex-direction: column;
@@ -14,7 +23,7 @@
                 font-size: 35px;
                 max-height: 30px;
                 text-align: center;
-                padding: 10px 10px;
+
         }
 
         .artistGrid {
@@ -27,6 +36,7 @@
         .repeater-div {
             display: grid;
             grid-template-columns: repeat(6, auto);
+            justify-content: center;
         }
 
             .artist-container{ /* Estilo aplicado para ambos */
@@ -34,10 +44,9 @@
               padding: 20px;
               font-size: 30px;
               text-align: center;
-                max-width: 15%;
-                min-width: 180px; /* Para responsividade */
-                margin: 10px;
-                text-align: center;
+              width: 245px;
+              margin: 10px;
+              text-align: center;
 
                 text-align: center;
                 white-space: normal; /* Permite que o texto dentro quebre linha, se necessário */
@@ -49,6 +58,8 @@
                 height: 200px; /* Tamanho da imagem */
                 border-radius: 50%; /* Imagem circular para artistas */
                 object-fit: cover; /* Garantir que a imagem cubra o espaço sem distorção */
+
+                margin-bottom: 15px;
           }
         
     </style>

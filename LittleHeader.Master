@@ -87,16 +87,22 @@ a {
 }
 
 .navigation {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas de tamanho igual */
+    gap: 10px;
     align-items: center;
     padding-left: 90px;
     height: 100px;
     margin: 0px;
+}
+
+.navOption2, .navOption3{
 
 }
 
 .navOption1:hover, .navOption2:hover, .navOption3:hover {
     color: #CF51CA;
+    transform: scale(1.05);
 }
 
 .navigation a {
@@ -157,22 +163,26 @@ a {
 
 /* Estilização do dropdown-menu */
 .dropdown-menu {
-    margin: 0 !important;
+  margin: 0;
     padding: 10px;
     border: 0;
     display: none; /* Inicialmente invisível */
-    position: absolute; /* Para o menu dropdown */
-    top: 100%; /* Posiciona logo abaixo do header */
-    right: 0; /* Alinha à direita do dropdown */
+    position: absolute;
+    top: 100%; /* Para ficar abaixo do header */
+    right: 0; /* Alinhado à direita */
     background-color: #1C1C1C;
     width: max-content; /* Largura do conteúdo */
-    height: 150px; /* Altura fixa do dropdown */
-    box-sizing: border-box; /* Inclui padding na altura total */
-    transition: 0.3s; /* Transição suave */
+    box-sizing: border-box;
+    transition: max-height 0.3s ease-in-out; /* Para suavizar */
+    
+    display: grid;
+    grid-template-columns: 1fr; /* Uma coluna */
+    gap: 10px; /* Espaço entre os itens */
+    max-height: none; /* Altura do menu vai aumentar automaticamente */
 }
 
 .dropdown-menu.show {
-    display: block; /* Exibe o menu quando a classe 'show' está presente */
+    display: grid;
 }
 
 .dropdown-item {
@@ -183,12 +193,12 @@ a {
     text-decoration: none;
     background-color: transparent;
     border: none;
-    width: 100%;
 }
 
 .dropdown-item:hover {
     background-color: #333; /* Cor de fundo ao passar o mouse */
     color: #CF51CA;
+    transform: scale(1.05);
 }
 
 .navOption1.active, .navOption2.active, .navOption3.active {
@@ -261,6 +271,7 @@ a {
             .resultado-item:hover {
                 background-color: #c1c1c1c1;
                 cursor: pointer;
+                transform: scale(1.05);
             }
 
 
@@ -282,24 +293,34 @@ a {
 
                             <!-- Barra de navegação -->
                             <ul class="navigation">
-                                <a id="navOption2" runat="server" class="navOption2" href="albuns.aspx"><li>Álbuns</li></a>
-                                <a id="navOption3" runat="server" class="navOption3" href="artistas.aspx"><li>Artistas</li></a>
+                                <div>
+                                    <div class="backgroudNavOption2">
+                                        <a id="navOption2" runat="server" class="navOption2" href="albuns.aspx">Álbuns</a>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class=" backgroudNavOption3">
+                                        <a id="navOption3" runat="server" class="navOption3" href="artistas.aspx">Artistas</a>
+                                    </div>
+                                </div>
                             </ul>
 
                             <!-- Caixa de busca -->
                             <asp:TextBox ID="SearchBox" runat="server" class="search_box" AutoPostBack="True" placeholder="Pesquisar..." OnTextChanged="Pesquisar"></asp:TextBox>
                          
-                            <asp:Panel ID="pnlResultados" runat="server" CssClass="resultado-panel" Visible="False">
-                                <asp:Repeater ID="rptResultados" runat="server">
-                                    <ItemTemplate>
-                                        <div class="resultado-item">
-                                            <span><%# Eval("Resultado") %> - <%# Eval("Origem") %></span>
-                                        </div>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </asp:Panel>
-
-                            <asp:ListBox ID="lstResultados" runat="server" CssClass="result-list"></asp:ListBox>
+<asp:Panel ID="pnlResultados" runat="server" CssClass="resultado-panel" Visible="False">
+    <asp:Repeater ID="rptResultados" runat="server">
+        <ItemTemplate>
+            <div class="resultado-item">
+                <!-- Link para navegação baseado no tipo de origem -->
+                <a href='<%# GerarLink(Eval("Origem").ToString(), Eval("Resultado").ToString()) %>' class="resultado-link">
+                    <span><%# Eval("Resultado") %> - <%# Eval("Origem") %></span>
+                </a>
+            </div>
+        </ItemTemplate>
+    </asp:Repeater>
+</asp:Panel>
 
 
                                 <!-- Dropdown do perfil -->
