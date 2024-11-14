@@ -1,0 +1,432 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="LittleHeader.master.cs" Inherits="_2024_08_22_TuneRate.LittleHeader" %>
+
+<html>
+<head runat="server">
+
+<link rel="icon" type="image/x-icon" href="imgs/TuneRate-favicon.png">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Julee&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS (inclui dependências como Popper.js) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TuneRate - Dê rate no seu som!</title>
+
+
+    <style>
+
+        body{
+            margin: 0;
+            padding: 0;
+            border: 0;
+
+            background-color: black;
+            color: #ffffff;
+            padding-top: 100px !important;
+        }
+
+        link[rel="icon"] {
+            border-radius: 50%;
+        }
+
+        .allContent{
+            display: flex;
+            flex-flow: column;
+            align-content: space-between;
+        }
+
+        .contentDiv{
+            max-width: 88%; /* Limita a largura máxima */
+            min-width: 88%;
+            min-height:100vh;
+            margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+            background-color: black;
+        }
+
+.header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1C1C1C;
+
+    position: fixed;
+    top: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit; /* Herda a cor do elemento pai */
+   }
+
+.logo_container {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    text-decoration: none
+}
+
+.logo_container h1 {
+    color: #A458DC;
+    font-family: 'Julee', cursive;
+    font-weight: normal;
+    font-size: 32px;
+    margin: 0px;
+    margin-left: 10px;
+}
+
+.logo_img {
+    height: 100px;
+}
+
+.navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas de tamanho igual */
+    gap: 10px;
+    align-items: center;
+    padding-left: 90px;
+    height: 100px;
+    margin: 0px;
+}
+
+.navOption2, .navOption3{
+
+}
+
+.navOption1:hover, .navOption2:hover, .navOption3:hover {
+    color: #CF51CA;
+    transform: scale(1.05);
+}
+
+.navigation a {
+    color: #ffffff;
+    font-family: 'Julee', cursive;
+    font-weight: normal;
+    font-size: 27px;
+    margin: 0 20px;
+    padding: 8px 0;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.search_boxDiv{
+   display: grid;
+   grid-template-rows: repeat(7, 1fr);
+   height: 100px;
+   width: 100%;
+   margin-left: 10vh;
+   padding: 0 10px;
+}
+
+.search_box {
+    grid-row: 3 / span 3;
+    height: 40px;
+    align-content: center;
+    justify-content: center;
+ 
+    font-size: 16px;
+    background-color: #D9D9D9;
+    border: 0;
+    border-radius: 10px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.panelResults{
+     grid-row: 6 / span 2;
+     width: 100%;
+
+}
+
+.dropdown {
+    position: fixed; 
+    top: 0; /* Fica alinhado ao topo da tela */
+    right: 3vh; /* Fica alinhado à direita da tela */
+    width: 50px; /* Defina a largura que você deseja */
+    height: 100px; /* Define a altura igual à do header */
+    display: flex; /* Permite que os itens internos se ajustem */
+    align-items: center; /* Centraliza os itens verticalmente */
+    justify-content: center; /* Centraliza os itens horizontalmente, se necessário */
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+}
+
+.divPerfil {
+    display: flex;
+}
+
+ .imgPerfil {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%; /* Deixa a imagem circular */
+    cursor: pointer;
+}
+
+/* Estilização do dropdown-menu */
+.dropdown-menu {
+  margin: 0;
+    padding: 10px;
+    border: 0;
+    display: none; /* Inicialmente invisível */
+    position: absolute;
+    top: 100%; /* Para ficar abaixo do header */
+    right: 0; /* Alinhado à direita */
+    background-color: #1C1C1C;
+    width: max-content; /* Largura do conteúdo */
+    box-sizing: border-box;
+    transition: max-height 0.3s ease-in-out; /* Para suavizar */
+    
+    display: grid;
+    grid-template-columns: 1fr; /* Uma coluna */
+    gap: 10px; /* Espaço entre os itens */
+    max-height: none; /* Altura do menu vai aumentar automaticamente */
+}
+
+.dropdown-menu.show {
+    display: grid;
+}
+
+.dropdown-item {
+   padding: 10px;
+    color: white;
+    text-align: left;
+    display: block;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+}
+
+.dropdown-item:hover {
+    background-color: #333; /* Cor de fundo ao passar o mouse */
+    color: #CF51CA;
+    transform: scale(1.05);
+}
+
+.navOption1.active, .navOption2.active, .navOption3.active {
+    color: #ff0000; /* Cor da opção ativa */
+}
+
+            .footer {
+                background-color: #1C1C1C; /* Cor de fundo igual ao header */
+                color: #ffffff;
+                padding: 20px;
+                text-align: center;
+                width: 100%;
+                font-family: 'Julee', cursive;
+                font-size: 16px;
+                max-height: 100px;
+
+            }
+
+            .footer-content {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .footer-links {
+                list-style-type: none;
+                padding: 0;
+                margin-bottom: 10px;
+            }
+
+            .footer-links li {
+                display: inline;
+                margin: 0 15px;
+            }
+
+            .footer-links a {
+                color: #ffffff;
+                text-decoration: none;
+            }
+
+            .footer-links a:hover {
+                color: #CF51CA; /* Cor ao passar o mouse */
+            }
+
+            .footer p {
+                margin: 0;
+            }
+
+            .resultado-panel {
+                
+                width: 100%;
+                background-color: #1c1c1c;
+                border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px; 
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                padding: 10px;
+            }
+
+            .resultado-item {
+                padding: 8px;
+                border-bottom: 1px solid #686868;
+            }
+
+            .resultado-item:last-child {
+                border-bottom: none;
+            }
+
+            .resultado-item:hover {
+                background-color: #c1c1c1c1;
+                cursor: pointer;
+                transform: scale(1.05);
+            }
+
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+        <body>
+            <form id="form1" runat="server">
+                <div class="allContent">
+                
+                        <div class="header">  
+                            <!-- Logo e título -->
+                            <a href="default.aspx" class="logo_container">
+                                <asp:Image ID="imgLogo" runat="server" class="logo_img" ImageUrl="~/imgs/TuneRate.png" />
+                                <h1>TuneRate</h1>
+                            </a>
+
+                            <!-- Barra de navegação -->
+                            <ul class="navigation">
+                                <div>
+                                    <div class="backgroudNavOption2">
+                                        <a id="navOption2" runat="server" class="navOption2" href="albuns.aspx">Álbuns</a>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class=" backgroudNavOption3">
+                                        <a id="navOption3" runat="server" class="navOption3" href="artistas.aspx">Artistas</a>
+                                    </div>
+                                </div>
+                            </ul>
+
+                            <div class="search_boxDiv">
+                                <!-- Caixa de busca -->
+                                <asp:TextBox ID="SearchBox" runat="server" class="search_box" AutoPostBack="True" placeholder="Pesquisar..." OnTextChanged="Pesquisar"></asp:TextBox>
+                         
+                                <div class="panelResults">
+                                    <asp:Panel ID="pnlResultados" runat="server" CssClass="resultado-panel" Visible="False">
+                                        <asp:Repeater ID="rptResultados" runat="server">
+                                            <ItemTemplate>
+                                                <div class="resultado-item">
+                                                    <!-- Link para navegação baseado no tipo de origem -->
+                                                    <a href='<%# GerarLink(Eval("Origem").ToString(), Eval("Resultado").ToString()) %>' class="resultado-link">
+                                                        <span><%# Eval("Resultado") %> - <%# Eval("Origem") %></span>
+                                                    </a>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+
+                                        <asp:Label ID="lblNoResults" runat="server" CssClass="no-results" Visible="False" Text="Não encontramos nada no nosso banco de dados."></asp:Label>
+                                    </asp:Panel>
+                                </div>
+                            </div>
+
+
+                                <!-- Dropdown do perfil -->
+                                <div class="container mt-5">
+                                    <div class="dropdown">
+
+                                        <div class="divPerfil">
+                                            <!-- Imagem que abre o menu -->
+                                            <a href="#" id="dropdownMenuButton" aria-expanded="false">
+                                                <asp:Image ID="imgPerfil" runat="server" class="imgPerfil" ImageUrl="~/imgs/unknown.png" />
+                                            </a>
+                                        </div>
+
+                                        <!-- Menu de perfil -->
+                                        <ul id="menuPerfil" class="dropdown-menu" runat="server" style="display: none;">
+                                            <asp:Button ID="ButtonPerfil" runat="server" CssClass="dropdown-item" Text="Perfil" OnClick="ButtonPerfil_Click" />
+                                            <asp:Button ID="ButtonSair" runat="server" CssClass="dropdown-item" Text="Sair" OnClick="ButtonLogout_Click" />
+
+                                            <!-- Botão Administração, visível apenas para administradores -->
+                                            <asp:Button ID="ButtonAdmin" runat="server" CssClass="dropdown-item" Text="Administração" OnClick="ButtonAdmin_Click" Visible="false" />
+                                        </ul>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <!-- JavaScript para alternar a visibilidade do menu -->
+                        <script>
+                            // Obtém os elementos do menu
+                            const imgPerfil = document.getElementById('<%= imgPerfil.ClientID %>');
+                            const menuPerfil = document.getElementById('menuPerfil');
+
+                            // Evento de clique para mostrar/ocultar o menu
+                            imgPerfil.addEventListener('click', function (e) {
+                                e.preventDefault(); // Previne o comportamento padrão
+
+                                // Alterna a visibilidade do menu
+                                if (menuPerfil.style.display === "none" || menuPerfil.style.display === "") {
+                                    menuPerfil.style.display = "block";
+                                } else {
+                                    menuPerfil.style.display = "none";
+                                }
+                            });
+
+                            // Fecha o menu ao clicar fora dele
+                            document.addEventListener('click', function (event) {
+                                if (!imgPerfil.contains(event.target) && !menuPerfil.contains(event.target)) {
+                                    menuPerfil.style.display = "none";
+                                }
+                            });
+
+
+                            // Obtém o painel de resultados
+                            const pnlResultados = document.getElementById('<%= pnlResultados.ClientID %>');
+
+                            // Função para mostrar/ocultar o painel de resultados
+                            function togglePainelResultados(visible) {
+                                pnlResultados.style.display = visible ? "block" : "none";
+                            }
+
+                            // Evento de clique para fechar o painel ao clicar fora dele
+                            document.addEventListener('click', function (event) {
+                                const imgPerfil = document.getElementById('<%= imgPerfil.ClientID %>');
+                                const menuPerfil = document.getElementById('menuPerfil');
+
+                                // Verifica se o clique não foi dentro do painel, do botão de perfil ou do menu
+                                if (
+                                    !pnlResultados.contains(event.target) && // Se não clicou no painel de resultados
+                                    !imgPerfil.contains(event.target) && // Se não clicou na imagem do perfil
+                                    !menuPerfil.contains(event.target) // Se não clicou no menu do perfil
+                                ) {
+                                    pnlResultados.style.display = "none"; // Oculta o painel de resultados
+                                    menuPerfil.style.display = "none"; // Oculta o menu de perfil também, se necessário
+                                }
+                            });
+                        </script>
+
+
+                <div class="contentDiv">
+            
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                             
+                        </asp:ContentPlaceHolder>
+                </div>
+
+                        <div>
+                            <footer class="footer">
+                                <div class="footer-content">
+                                    <ul class="footer-links">
+                                        <li><a href="default.aspx#about">Contato</a></li>
+                                        <li><a href="default.aspx#about">Sobre Nós</a></li>
+                                    </ul>
+                                    <p>&copy; 2024 TuneRate. Todos os direitos reservados.</p>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+            </form>
+        </body>
+</html>
