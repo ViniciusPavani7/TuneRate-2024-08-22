@@ -231,12 +231,12 @@
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
         ConnectionString="<%$ ConnectionStrings:TuneRate %>" 
-        SelectCommand="SELECT Nome, FotoBinario FROM Artistas">
+        SelectCommand="SELECT Nome, FotoBinario FROM Artistas ORDER BY NEWID()">
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
         ConnectionString="<%$ ConnectionStrings:TuneRate %>" 
-        SelectCommand="SELECT Titulo, Capa FROM Musicas">
+        SelectCommand="SELECT Titulo, Capa FROM Musicas ORDER BY NEWID()">
     </asp:SqlDataSource>
 
 
