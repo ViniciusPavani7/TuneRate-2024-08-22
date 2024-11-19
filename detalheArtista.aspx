@@ -31,7 +31,7 @@ html, body {
     }
 
     .artist-photo {
-            max-width: 400px;   /* Limita a largura máxima da imagem */
+            width: 350px;   /* Limita a largura máxima da imagem */
             height: 350px;      /* Altura da imagem */
             object-fit: cover;   /* Ajusta a imagem para preencher o espaço */
             display: block;      /* Torna a imagem um bloco */
