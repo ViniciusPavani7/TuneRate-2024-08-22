@@ -51,6 +51,7 @@
                 font-size: 35px;
                 max-height: 30px;
             }
+
             .imgIcon1 {
                 position: fixed;
                 bottom: 47px;
@@ -78,11 +79,14 @@
                 padding-top: 20px;
                 justify-content: flex-start;
 
+
+                height: 330px;
+                border: 0;
+                margin: 0;
             }
 
             .repeater-div{
                 display:flex;
-
             }
 
             .artist-container, .music-container { /* Estilo aplicado para ambos */
@@ -169,6 +173,8 @@
         </div>
 
         <div class="conteudos-database">
+
+
             <div class="artistGrid">
                 <asp:Label ID="artTag" runat="server" CssClass="artTag" Text="Artistas"></asp:Label>
                     <div class="repeater-div">
@@ -191,14 +197,14 @@
                     </div>
                 </div>
 
-                <div class="musicGrid">
-                    <asp:Label ID="MscTag" runat="server" CssClass="MscTag" Text="Músicas"></asp:Label>
 
+            <asp:Label ID="Label1" runat="server" CssClass="MscTag" Text="Músicas"></asp:Label>
+
+                <div class="musicGrid">
                             <div class="repeater-div">
                                 <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">
                                     <ItemTemplate>
                                         <div class="music-container">
-                                            <!-- Link para detalheMusica.aspx com o título da música na URL -->
                                             <a href='<%# "detalheMusica.aspx?nome=" + Server.UrlEncode(Eval("Titulo").ToString()) %>'>
                                                 <img src='data:image/png;base64,<%# Convert.ToBase64String((byte[])Eval("Capa")) %>' class="music-image" alt='<%# Eval("Titulo") %>' />
                                                 <h5 class="music-title"><%# Eval("Titulo") %></h5>
@@ -206,8 +212,11 @@
                                         </div>
                                     </ItemTemplate>
                                 </asp:Repeater>
-                             </div>
+                           </div>
+
                 </div>
+
+
             </div>
 
                 <div>

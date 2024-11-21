@@ -77,7 +77,7 @@
         .loginBtn {
             width: 100%;
             padding: 15px;
-            background-color: #A458DC; /* Cor roxa */
+            background-color: #6700a5;
             color: #FFFFFF;
             border: none;
             border-radius: 5px;

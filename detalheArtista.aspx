@@ -101,8 +101,9 @@ html, body {
 
                 <div class="infoDiv">
                     <p><strong>Nacionalidade:</strong> <asp:Label ID="lblNation" runat="server"></asp:Label></p>
-
-                    <p><strong>Mais informações:</strong> 
+                    <p><strong>Gênero Musical:</strong> <asp:Label ID="lblGeneroMsc" runat="server"></asp:Label></p>
+                    <p><strong>Data de Aniversário:</strong> <asp:Label ID="lblDataAni" runat="server"></asp:Label></p>
+                    <p>Ver na 
                         <asp:Literal ID="wikiLink" runat="server"></asp:Literal>
                     </p>
                 </div>

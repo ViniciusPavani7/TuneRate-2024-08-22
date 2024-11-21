@@ -273,11 +273,6 @@ transition: all 0.3s ease; /* Transição suave para hover */
                              </p>
                              <p class="data"><small><%# Eval("Data", "{0:dd/MM/yyyy HH:mm}") %></small></p>
                              <p class="txtComentario"><%# Eval("Comentario") %></p>
-
-                       
-
-
-                             <asp:Button ID="btnExcluir" runat="server" Text="Excluir" CssClass="btnExcluir" CommandName="Excluir" CommandArgument='<%# Eval("CommentID") %>' Visible="false" />
                          </div>
                      </ItemTemplate>
                  </asp:Repeater>

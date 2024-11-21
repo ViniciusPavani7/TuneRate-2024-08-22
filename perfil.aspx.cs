@@ -57,7 +57,6 @@ namespace _2024_08_22_TuneRate
                     // Comparando o UserId do comentário com o usuário logado ou se ele é um administrador
                     if (userIdComment == userIdSession || ehAdministrador)
                     {
-                        btnExcluir.Visible = true;
                     }
                     else
                     {
@@ -399,6 +398,8 @@ namespace _2024_08_22_TuneRate
                             insertCmd.ExecuteNonQuery();
                         }
                     }
+
+                    Response.Redirect(Request.Url.ToString());
                 }
                 catch (Exception ex)
                 {
@@ -493,7 +494,7 @@ namespace _2024_08_22_TuneRate
 
                         if (rowsAffected > 0)
                         {
-
+                            Response.Redirect(Request.Url.ToString());
                         }
                         else
                         {

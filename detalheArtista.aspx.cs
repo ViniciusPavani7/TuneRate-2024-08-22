@@ -36,7 +36,7 @@ namespace _2024_08_22_TuneRate.Detalhes
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT Nome, Nacionalidade, FotoBinario FROM Artistas WHERE Nome = @Nome";
+                string query = "SELECT Nome, Nacionalidade, GeneroMusical, DataNascimento, FotoBinario FROM Artistas WHERE Nome = @Nome";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -48,6 +48,15 @@ namespace _2024_08_22_TuneRate.Detalhes
                         {
                             lblNomeArt.Text = reader["Nome"].ToString();
                             lblNation.Text = reader["Nacionalidade"].ToString();
+                            lblGeneroMsc.Text = reader["GeneroMusical"].ToString();
+                            if (DateTime.TryParse(reader["DataNascimento"].ToString(), out DateTime dataNascimento))
+                            {
+                                lblDataAni.Text = dataNascimento.ToString("dd/MM/yyyy"); // Formato de data no padrão brasileiro
+                            }
+                            else
+                            {
+                                lblDataAni.Text = "Data não disponível";
+                            }
 
                             byte[] fotoBytes = reader["FotoBinario"] as byte[];
                             if (fotoBytes != null)

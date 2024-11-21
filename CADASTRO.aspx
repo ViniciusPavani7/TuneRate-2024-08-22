@@ -74,7 +74,7 @@
         .registerBtn {
             width: 100%;
             padding: 15px;
-            background-color: #391477;
+            background-color: #6700a5;
             color: #FFFFFF;
             border: none;
             border-radius: 5px;

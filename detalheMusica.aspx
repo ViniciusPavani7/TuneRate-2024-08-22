@@ -89,7 +89,7 @@
             border-radius: 10px;
         }
 
-        .btnEnviar{
+        .btnEnviar {
             font-family: 'Roboto', sans-serif;
             height: 50px;
             width: 140px;
@@ -97,8 +97,14 @@
             font-size: 18px;
             border-radius: 40px;
             background-color: #2e2d2d;
-            color: gray;
+            color: white;
             margin: 15px 0 0 0;
+            transition: all 0.3s ease; /* Adiciona uma transição suave */
+        }
+
+        .btnEnviar:hover {
+            transform: scale(1.1); /* Aumenta o tamanho do botão */
+            background-color: #4d4b4b; /* Deixa o botão mais claro */
         }
 
         .comentario-item {

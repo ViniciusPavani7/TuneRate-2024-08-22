@@ -42,6 +42,24 @@ namespace _2024_08_22_TuneRate.Detalhes
         protected global::System.Web.UI.WebControls.Label lblNation;
 
         /// <summary>
+        /// Controle lblGeneroMsc.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGeneroMsc;
+
+        /// <summary>
+        /// Controle lblDataAni.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDataAni;
+
+        /// <summary>
         /// Controle wikiLink.
         /// </summary>
         /// <remarks>

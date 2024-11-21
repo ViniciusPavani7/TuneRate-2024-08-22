@@ -33,13 +33,13 @@ namespace _2024_08_22_TuneRate
         protected global::System.Web.UI.WebControls.Repeater ArtistRepeater;
 
         /// <summary>
-        /// Controle MscTag.
+        /// Controle Label1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MscTag;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
         /// Controle Repeater2.

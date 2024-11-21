@@ -298,6 +298,8 @@ namespace _2024_08_22_TuneRate
                     }
                     txtComentario.Text = "";
                     CarregarComentarios();
+
+                    Response.Redirect(Request.Url.ToString());
                 }
                 else
                 {
