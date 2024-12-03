@@ -54,6 +54,6 @@ Para autenticar no servidor, você precisa usar o comando **AUTH LOGIN**, que en
     ```
 
 O servidor vai pedir o seu nome de usuário e senha codificados. Para isso, você precisará codificar seu **e-mail** e a **senha do aplicativo** em base64.
-
+    ```bash
 ******Você vai encontrar isso no seu codigo, linha 118 do arquivo forgotPassword.aspx.cs***********
     ```
