@@ -23,9 +23,9 @@ No Windows, o **Telnet** pode não estar habilitado por padrão. Para ativá-lo,
 
 Após conectar, o servidor SMTP deverá responder com algo como:
 
-    ```sql
+    
     220 smtp.gmail.com ESMTP Exim 4.94.2 Wed, 15 Dec 2021 09:00:00 +0000
-    ```
+    
 
 Se você ver essa mensagem, significa que a conexão com o servidor foi bem-sucedida.
 
@@ -33,15 +33,15 @@ Se você ver essa mensagem, significa que a conexão com o servidor foi bem-suce
 
 Agora, envie o comando **HELO** (ou **EHLO**) para iniciar a comunicação:
 
-    ```bash
+    
     HELO yourdomain.com
-    ```
+    
 
 O servidor deve responder com algo como:
 
-    ```css
+    
     250 smtp.gmail.com Hello [ip address]
-    ```
+    
 
 ### 5. Autenticação (AUTH LOGIN)
 
